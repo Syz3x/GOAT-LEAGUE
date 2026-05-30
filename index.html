@@ -503,7 +503,8 @@
                         fiksturAlan.innerHTML += `<div class="hafta-baslik">-- ${mevcutHafta}. GÜN --</div>`;
                     }
 
-                    const skorGoster = mac.durum === "Oynandı" ? `${mac.evSkor} - ${mac.depSkor}` : "VS";
+                    // Güncel tarih gösterme mantığıyla değiştirilmiş hali
+const skorGoster = mac.durum === "Oynandı" ? `${mac.evSkor} - ${mac.depSkor}` : `<span style="font-size: 0.75rem; color: #d4af37;">${mac.durum}</span>`;
 
                     fiksturAlan.innerHTML += `
                         <div class="mac-kart">
