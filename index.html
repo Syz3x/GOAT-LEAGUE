@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GOAT LEAGUE | Turnuva Merkezi</title>
+    <title>GOAT LEAGUE | JFK Sezonu</title>
     <style>
         :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --accent-color: #f1c40f; /* GOAT temasına uygun Altın/Sarı renk */
-            --text-color: #c9d1d9;
+            --bg-color: #161a25; /* Koyu Lacivert Arka Plan */
+            --card-bg: #1f2533; /* Kart Arka Planı */
+            --accent-color: #d4af37; /* Elit Gold/Sarı */
+            --text-color: #e8e3d3; /* Krem Yazı Rengi */
             --text-bright: #ffffff;
-            --border-color: #30363d;
+            --border-color: #2c3545;
+            
+            /* Form Renkleri */
+            --form-g: #27ae60;
+            --form-m: #e74c3c;
+            --form-b: #95a5a6;
         }
         
         body {
@@ -20,24 +25,35 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
+            background-image: radial-gradient(circle at top, #1f2533 0%, #161a25 100%);
+            min-height: 100vh;
         }
 
         header {
-            background: linear-gradient(135deg, #111, #2c3e50);
-            padding: 30px 20px;
+            background: linear-gradient(135deg, #0d1117, #161a25);
+            padding: 40px 20px 20px 20px;
             text-align: center;
             border-bottom: 3px solid var(--accent-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            position: relative;
         }
 
         header h1 {
             margin: 0;
             color: var(--accent-color);
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
+            letter-spacing: 4px;
+            text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        header p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            opacity: 0.8;
+            text-transform: uppercase;
         }
 
         nav {
@@ -48,35 +64,37 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         nav button {
             background: none;
             border: none;
             color: var(--text-color);
-            padding: 15px 25px;
-            font-size: 1rem;
+            padding: 16px 25px;
+            font-size: 0.95rem;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         nav button:hover, nav button.active {
             color: var(--accent-color);
             border-bottom: 3px solid var(--accent-color);
-            background-color: rgba(255,255,255,0.02);
+            background-color: rgba(255,255,255,0.03);
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1050px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
         .tab-content {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.4s ease;
         }
 
         .tab-content.active {
@@ -84,15 +102,17 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         h2 {
-            color: var(--text-bright);
+            color: var(--accent-color);
             border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
-            margin-bottom: 20px;
+            padding-left: 15px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         /* Tablo Tasarımları */
@@ -101,40 +121,86 @@
             border-collapse: collapse;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
         }
 
         th, td {
-            padding: 14px 16px;
+            padding: 16px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
         }
 
         th {
-            background-color: #21262d;
+            background-color: #11151e;
             color: var(--accent-color);
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
         }
 
         tr:hover {
-            background-color: rgba(255,255,255,0.03);
+            background-color: rgba(212, 175, 55, 0.05);
         }
 
-        td:nth-child(1) {
+        .takim-hucre {
+            display: flex;
+            align-items: center;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-bright);
+            font-size: 1.1rem;
+        }
+
+        .takim-logo {
+            width: 35px;
+            height: 35px;
+            object-fit: contain;
+            margin-right: 15px;
+            border-radius: 50%;
         }
 
         .puan-kutusu {
-            font-weight: bold;
+            font-weight: 800;
             color: var(--accent-color);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            background-color: rgba(212, 175, 55, 0.1);
         }
+
+        /* Lider Çizgisi (King's Cup Detayı) */
+        tr:nth-child(1) td:first-child {
+            border-left: 4px solid #3498db; /* Şampiyon Mavi Çizgi */
+        }
+        tr:nth-child(2) td:first-child, tr:nth-child(3) td:first-child, tr:nth-child(4) td:first-child {
+            border-left: 4px solid #7f8c8d; /* Play-Off Gri Çizgi */
+        }
+
+        /* Form Durumu (Son 3 Maç) */
+        .form-container {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .form-badge {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .form-g { background-color: var(--form-g); }
+        .form-m { background-color: var(--form-m); }
+        .form-b { background-color: var(--form-b); }
 
         /* Fikstür Kartları */
         .mac-kart {
@@ -146,7 +212,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        
+        .mac-kart:hover {
+            transform: scale(1.01);
+            border-color: var(--accent-color);
         }
 
         .takim-ad {
@@ -159,47 +231,37 @@
         .takim-sag { text-align: left; padding-left: 20px; }
 
         .skor-alan {
-            background-color: #21262d;
-            padding: 8px 15px;
+            background-color: #11151e;
+            padding: 10px 20px;
             border-radius: 6px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--text-bright);
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: var(--accent-color);
             min-width: 60px;
             text-align: center;
             border: 1px solid var(--border-color);
         }
 
         .hafta-baslik {
-            background-color: #1f1c2c;
-            color: var(--text-bright);
+            color: var(--text-color);
             padding: 10px;
-            border-radius: 6px;
-            margin-top: 25px;
+            margin-top: 30px;
+            margin-bottom: 10px;
             font-weight: bold;
             text-align: center;
-            border-bottom: 2px solid var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 2px;
         }
 
         /* Video Bölümü */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .video-kart {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-
         .video-konteyner {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border: 2px solid var(--border-color);
         }
 
         .video-konteyner iframe {
@@ -210,29 +272,38 @@
             height: 100%;
         }
 
-        .video-bilgi {
-            padding: 15px;
-        }
-
-        .video-bilgi h4 {
-            margin: 0 0 5px 0;
-            color: var(--text-bright);
-        }
-
         /* Kurallar */
         .kural-listesi {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 25px;
-            border-radius: 8px;
+            padding: 30px;
+            border-radius: 10px;
             line-height: 1.8;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        /* Reklam / Sponsor Afişi */
+        .sponsor-banner {
+            margin-top: 40px;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        .sponsor-banner img {
+            width: 100%;
+            display: block;
         }
 
         .loading {
             text-align: center;
-            padding: 40px;
+            padding: 50px;
             font-size: 1.2rem;
             color: var(--accent-color);
+            font-weight: bold;
+            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -240,24 +311,25 @@
 
     <header>
         <h1>GOAT LEAGUE</h1>
+        <p>JFK Sezonu | 2024-2025</p>
     </header>
 
     <nav>
         <button class="active" onclick="switchTab('puan-durumu')">Puan Durumu</button>
         <button onclick="switchTab('fikstur')">Fikstür</button>
-        <button onclick="switchTab('ozetler')">Maç Özetleri</button>
+        <button onclick="switchTab('ozetler')">Günün Anları</button>
         <button onclick="switchTab('kurallar')">Kurallar</button>
     </nav>
 
     <div class="container">
         
         <div id="puan-durumu" class="tab-content active">
-            <h2>Canlı Puan Durumu</h2>
-            <div id="puan-loading" class="loading">Saha koşulları kontrol ediliyor...</div>
+            <h2>Lig Tablosu</h2>
+            <div id="puan-loading" class="loading">Sahaya iniliyor, veriler çekiliyor...</div>
             <table id="puan-tablosu" style="display: none;">
                 <thead>
                     <tr>
-                        <th>Takım</th>
+                        <th style="text-align: left;">Takım</th>
                         <th>O</th>
                         <th>G</th>
                         <th>B</th>
@@ -265,56 +337,90 @@
                         <th>AG</th>
                         <th>YG</th>
                         <th>AV</th>
-                        <th>P</th>
+                        <th>Puan</th>
+                        <th>Form</th>
                     </tr>
                 </thead>
                 <tbody id="puan-body">
                     </tbody>
             </table>
+            <div class="sponsor-banner"><img id="reklam1" src="" alt="Sponsor"></div>
         </div>
 
         <div id="fikstur" class="tab-content">
-            <h2>Maç Fikstürü & Sonuçlar</h2>
-            <div id="fikstur-loading" class="loading">Maç takvimi yükleniyor...</div>
+            <h2>Maç Takvimi & Sonuçlar</h2>
+            <div id="fikstur-loading" class="loading">Fikstür çekiliyor...</div>
             <div id="fikstur-alan">
                 </div>
+            <div class="sponsor-banner"><img id="reklam2" src="" alt="Sponsor"></div>
         </div>
 
         <div id="ozetler" class="tab-content">
-            <h2>En İyi Anlar & Özetler</h2>
-            <div class="video-grid">
-                
-                <div class="video-kart">
-                    <div class="video-konteyner">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-bilgi">
-                        <h4>Açılış Günü Anları</h4>
-                        <p>GOAT League'in ilk maçlarındaki en kritik anlar.</p>
-                    </div>
-                </div>
-
+            <h2>Jenerik & Özetler</h2>
+            <div class="video-konteyner">
+                <iframe src="https://www.youtube.com/embed/9U8HEcSeAZY?autoplay=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
+            <div class="sponsor-banner"><img id="reklam3" src="" alt="Sponsor"></div>
         </div>
 
         <div id="kurallar" class="tab-content">
-            <h2>GOAT League Kuralları</h2>
+            <h2>Lig Kuralları & Statü</h2>
             <div class="kural-listesi">
-                <ol>
-                    <li>Maçlar EA FC 26 üzerinden "Klasik Maç" modunda oynanacaktır.</li>
-                    <li>Devre süresi 6 dakika olarak ayarlanmalıdır.</li>
-                    <li>Maç esnasında kasıtlı olarak oyundan çıkan veya bağlantıyı koparan kişi hükmen (3-0) mağlubiyet alır.</li>
-                    <li>Maç bittikten sonra kazanan oyuncu skor ekranının fotoğrafını çekip gruba atmalıdır.</li>
-                    <li>Oynanan maçların özet videoları kaydedilip site yöneticisine ulaştırılacaktır.</li>
-                </ol>
+                <h3 style="color: var(--accent-color); margin-top: 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">🎮 Maç Kuralları</h3>
+                <ul style="list-style-type: square; margin-bottom: 30px; color: var(--text-color);">
+                    <li><strong>Maç Türü:</strong> 95 GEN</li>
+                    <li><strong>Maç Süresi:</strong> 6x2</li>
+                    <li><strong>Oyun Hızı:</strong> Hızlı</li>
+                </ul>
+
+                <h3 style="color: var(--accent-color); border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">⚖️ Genel Kurallar</h3>
+                <ul style="list-style-type: square; line-height: 2; color: var(--text-color);">
+                    <li>Maçı oynayan iki takımdan en az biri maç boyunca <strong style="color:white;">maçın video kaydını almak zorundadır.</strong></li>
+                    <li>Gol sevinçleri izlenecektir. 😎</li>
+                    <li>Gol tekrarı olağanüstü bir gol olmadığı sürece geçilecektir.</li>
+                    <li>Maç sırasında <strong style="color:#e74c3c;">Trash Talk yasaktır.</strong> <em>(Güvenlik önlemi)</em> 🛑</li>
+                    <li>İzleyiciler maç sırasında oyuncuların dikkatini dağıtacak hareket/konuşma yapamaz.</li>
+                    <li>Gol atan takımın <strong style="color:white;">gol müziğini</strong> moderatörlerin açması zorunludur. 🎵</li>
+                    <li>GOAT LEAGUE <strong style="color:white;">22 Kasım'da başlayıp, 3 Aralık'ta</strong> sona erecektir. 📅</li>
+                    <li>Puan durumunda <strong style="color:var(--accent-color);">1. olana ödül</strong> verilecektir. 🏆</li>
+                    <li>Turnuvaya katılan her takım kuralları okumuş ve kabul etmiş sayılır.</li>
+                </ul>
             </div>
+            <div class="sponsor-banner"><img id="reklam4" src="" alt="Sponsor"></div>
         </div>
 
     </div>
 
     <script>
-        // LİNKİNİ DOĞRU YERE BEN YAPIŞTIRDIM, BURAYLA HİÇ OYNAMANA GEREK YOK!
+        // ==========================================
+        // BURASI SENİN DOLDURACAĞIN ALAN KNK!
+        // Tırnakların ("") içine Discord'dan vs. aldığın linkleri yapıştır.
+        // ==========================================
+
+        // 1. Google Sheets Linkin
         const API_URL = "https://script.google.com/macros/s/AKfycbxYH8oZCVFCSQyO6nYBon2BUPIO91U1xKLLT4aVPMr_DgTJDwY6TMHaSaeWW4qQGf4/exec";
+
+        // 2. Takım Logoları (Resim Linkleri)
+        const TAKIM_LOGOLARI = {
+            "Bozkurt FC": "",
+            "Gunes FC": "BURAYA_GUNES_LOGO_LINKI",
+            "Vaxess FC": "BURAYA_VAXESS_LOGO_LINKI",
+            "Vega SK": "BURAYA_VEGA_LOGO_LINKI",
+            "Huginn SK": "BURAYA_HUGINN_LOGO_LINKI"
+        };
+
+        // 3. Afiş / Reklam Görseli Linki
+        const REKLAM_LINKI = "BURAYA_GOAT_REKLAM_AFISI_LINKINI_YAPISTIR";
+
+        // ==========================================
+        // BURADAN AŞAĞISINA DOKUNMA, GERİSİ BENDE!
+        // ==========================================
+
+        // Reklamları sayfalara otomatik bas
+        document.getElementById('reklam1').src = REKLAM_LINKI;
+        document.getElementById('reklam2').src = REKLAM_LINKI;
+        document.getElementById('reklam3').src = REKLAM_LINKI;
+        document.getElementById('reklam4').src = REKLAM_LINKI;
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -324,22 +430,52 @@
             event.currentTarget.classList.add('active');
         }
 
+        // Son 3 maçın form grafiğini çıkaran zeka
+        function getFormGrafigi(takim, fiksturData) {
+            let oynananMaclar = fiksturData.filter(m => m.durum === "Oynandı" && (m.evSahibi === takim || m.deplasman === takim));
+            let son3Mac = oynananMaclar.slice(-3); // Sadece son 3 maçı al
+            let formHtml = '';
+
+            son3Mac.forEach(m => {
+                let evSkor = parseInt(m.evSkor);
+                let depSkor = parseInt(m.depSkor);
+                
+                if (m.evSahibi === takim) {
+                    if (evSkor > depSkor) formHtml += '<span class="form-badge form-g">G</span>';
+                    else if (evSkor < depSkor) formHtml += '<span class="form-badge form-m">M</span>';
+                    else formHtml += '<span class="form-badge form-b">B</span>';
+                } else {
+                    if (depSkor > evSkor) formHtml += '<span class="form-badge form-g">G</span>';
+                    else if (depSkor < evSkor) formHtml += '<span class="form-badge form-m">M</span>';
+                    else formHtml += '<span class="form-badge form-b">B</span>';
+                }
+            });
+
+            return `<div class="form-container">${formHtml}</div>`;
+        }
+
         async function verileriGetir() {
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
                 
-                // Puan Durumunu Tabloya Basma
+                // Puan Durumu Basımı
                 const puanBody = document.getElementById('puan-body');
                 puanBody.innerHTML = '';
                 
-                // Puanları en yüksekten en düşüğe sırala (Puan eşitse averaja bak)
+                // Sıralama Algoritması (Puan > Averaj)
                 data.puanDurumu.sort((a, b) => b.puan - a.puan || b.av - a.av);
 
                 data.puanDurumu.forEach(item => {
+                    let takimLogosu = TAKIM_LOGOLARI[item.takim] || "https://i.hizliresim.com/k9m6n02.png"; // Bulamazsa boş kalkan koyar
+                    let formGorseli = getFormGrafigi(item.takim, data.fikstur);
+
                     puanBody.innerHTML += `
                         <tr>
-                            <td>${item.takim}</td>
+                            <td class="takim-hucre">
+                                <img src="${takimLogosu}" class="takim-logo" alt="${item.takim}">
+                                ${item.takim}
+                            </td>
                             <td>${item.o}</td>
                             <td>${item.g}</td>
                             <td>${item.b}</td>
@@ -348,22 +484,23 @@
                             <td>${item.yg}</td>
                             <td>${item.av}</td>
                             <td class="puan-kutusu">${item.puan}</td>
+                            <td>${formGorseli}</td>
                         </tr>
                     `;
                 });
+                
                 document.getElementById('puan-loading').style.display = 'none';
                 document.getElementById('puan-tablosu').style.display = 'table';
 
-                // Fikstürü Basma
+                // Fikstür Basımı
                 const fiksturAlan = document.getElementById('fikstur-alan');
                 fiksturAlan.innerHTML = '';
                 let mevcutHafta = "";
 
                 data.fikstur.forEach(mac => {
-                    // Senin tablondaki GÜN sütununa uyum sağlandı
                     if(mac.hafta !== mevcutHafta) {
                         mevcutHafta = mac.hafta;
-                        fiksturAlan.innerHTML += `<div class="hafta-baslik">${mevcutHafta}. GÜN</div>`;
+                        fiksturAlan.innerHTML += `<div class="hafta-baslik">-- ${mevcutHafta}. GÜN --</div>`;
                     }
 
                     const skorGoster = mac.durum === "Oynandı" ? `${mac.evSkor} - ${mac.depSkor}` : "VS";
@@ -380,8 +517,8 @@
 
             } catch (error) {
                 console.error("Veri çekme hatası:", error);
-                document.getElementById('puan-loading').innerText = "Veriler yüklenirken bir hata oluştu. Google Sheets bağlantısını kontrol edin.";
-                document.getElementById('fikstur-loading').innerText = "Fikstür yüklenirken bir hata oluştu.";
+                document.getElementById('puan-loading').innerText = "Veriler çekilirken hata oluştu. Linkleri kontrol edin.";
+                document.getElementById('fikstur-loading').innerText = "Fikstür yüklenemedi.";
             }
         }
 
