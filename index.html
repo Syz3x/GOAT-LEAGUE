@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EA FC 26 Turnuva Merkezi</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --accent-color: #00f2fe;
+            --text-color: #c9d1d9;
+            --text-bright: #ffffff;
+            --border-color: #30363d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--text-bright);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            padding: 15px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        nav button:hover, nav button.active {
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--text-bright);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Tablo Tasarımları */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #21262d;
+            color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        tr:hover {
+            background-color: rgba(255,255,255,0.03);
+        }
+
+        td:nth-child(1) {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-bright);
+        }
+
+        .puan-kutusu {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* Fikstür Kartları */
+        .mac-kart {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .takim-ad {
+            flex: 1;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .takim-sol { text-align: right; padding-right: 20px; }
+        .takim-sag { text-align: left; padding-left: 20px; }
+
+        .skor-alan {
+            background-color: #21262d;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--text-bright);
+            min-width: 60px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .hafta-baslik {
+            background-color: #1f1c2c;
+            color: var(--accent-color);
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* Video Bölümü */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-kart {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .video-konteyner {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-konteyner iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-bilgi {
+            padding: 15px;
+        }
+
+        .video-bilgi h4 {
+            margin: 0 0 5px 0;
+            color: var(--text-bright);
+        }
+
+        /* Kurallar */
+        .kural-listesi {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 8px;
+            line-height: 1.8;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EA FC 26 Şampiyonlar Ligi</h1>
+    </header>
+
+    <nav>
+        <button class="active" onclick="switchTab('puan-durumu')">Puan Durumu</button>
+        <button onclick="switchTab('fikstur')">Fikstür</button>
+        <button onclick="switchTab('ozetler')">Maç Özetleri</button>
+        <button onclick="switchTab('kurallar')">Kurallar</button>
+    </nav>
+
+    <div class="container">
+        
+        <div id="puan-durumu" class="tab-content active">
+            <h2>Canlı Puan Durumu</h2>
+            <div id="puan-loading" class="loading">Veriler Google Sheets'ten yükleniyor...</div>
+            <table id="puan-tablosu" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Takım</th>
+                        <th>O</th>
+                        <th>G</th>
+                        <th>B</th>
+                        <th>M</th>
+                        <th>AG</th>
+                        <th>YG</th>
+                        <th>AV</th>
+                        <th>Puan</th>
+                    </tr>
+                </thead>
+                <tbody id="puan-body">
+                    </tbody>
+            </table>
+        </div>
+
+        <div id="fikstur" class="tab-content">
+            <h2>Maç Fikstürü & Sonuçlar</h2>
+            <div id="fikstur-loading" class="loading">Fikstür yükleniyor...</div>
+            <div id="fikstur-alan">
+                </div>
+        </div>
+
+        <div id="ozetler" class="tab-content">
+            <h2>En İyi Anlar & Özetler</h2>
+            <div class="video-grid">
+                
+                <div class="video-kart">
+                    <div class="video-konteyner">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-bilgi">
+                        <h4>1. Hafta: Önemli Anlar</h4>
+                        <p>Turnuvanın açılış haftasındaki muhteşem goller ve kritik kurtarışlar.</p>
+                    </div>
+                </div>
+
+                <div class="video-kart">
+                    <div class="video-konteyner">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-bilgi">
+                        <h4>Haftanın Golü</h4>
+                        <p>Uzaklardan doksana takılan o efsane golün tekrarı.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="kurallar" class="tab-content">
+            <h2>Turnuva Kuralları</h2>
+            <div class="kural-listesi">
+                <ol>
+                    <li>Maçlar EA FC 26 üzerinden "Klasik Maç" modunda oynanacaktır.</li>
+                    <li>Devre süresi 6 dakika olarak ayarlanmalıdır.</li>
+                    <li>Maç esnasında kasıtlı olarak oyundan çıkan veya bağlantıyı koparan kişi hükmen (3-0) mağlubiyet alır.</li>
+                    <li>Maç bittikten sonra kazanan oyuncu skor ekranının fotoğrafını çekip gruba atmalıdır.</li>
+                    <li>Oynanan maçların özet videoları kaydedilip site yöneticisine ulaştırılacaktır.</li>
+                </ol>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // GEÇEN ADIMDA ALDIĞIN GOOGLE APPS SCRIPT LİNKİNİ AŞAĞIDAKİ ÇİFT TIRNAKLARIN İÇİNE YAPIŞTIR!
+        const API_URL = "BURAYA_ALDIĞIN_LİNKİ_YAPIŞTIR";
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        async function verileriGetir() {
+            if(API_URL === "https://script.google.com/macros/s/AKfycbw_r6Eo8QsVfMnSyw-tCvbCldFOBPsYtzo2yNTca_EbgtgN-jz4_nzyCDsRiFXr12Ud/exec
+
+") {
+                alert("Lütfen kodun içindeki API_URL kısmına Google Apps Script linkini yapıştırın!");
+                return;
+            }
+
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                // Puan Durumunu Tabloya Basma
+                const puanBody = document.getElementById('puan-body');
+                puanBody.innerHTML = '';
+                
+                // Puanları en yüksekten en düşüğe sırala
+                data.puanDurumu.sort((a, b) => b.puan - a.puan || b.av - a.av);
+
+                data.puanDurumu.forEach(item => {
+                    puanBody.innerHTML += `
+                        <tr>
+                            <td>${item.takim}</td>
+                            <td>${item.o}</td>
+                            <td>${item.g}</td>
+                            <td>${item.b}</td>
+                            <td>${item.m}</td>
+                            <td>${item.ag}</td>
+                            <td>${item.yg}</td>
+                            <td>${item.av}</td>
+                            <td class="puan-kutusu">${item.puan}</td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('puan-loading').style.display = 'none';
+                document.getElementById('puan-tablosu').style.display = 'table';
+
+                // Fikstürü Basma
+                const fiksturAlan = document.getElementById('fikstur-alan');
+                fiksturAlan.innerHTML = '';
+                let mevcutHafta = "";
+
+                data.fikstur.forEach(mac => {
+                    if(mac.hafta !== mevcutHafta) {
+                        mevcutHafta = mac.hafta;
+                        fiksturAlan.innerHTML += `<div class="hafta-baslik">${mevcutHafta}. HAFTA</div>`;
+                    }
+
+                    const skor Göster = mac.durum === "Oynandı" ? `${mac.evSkor} - ${mac.depSkor}` : "VS";
+
+                    fiksturAlan.innerHTML += `
+                        <div class="mac-kart">
+                            <div class="takim-ad takim-sol">${mac.evSahibi}</div>
+                            <div class="skor-alan">${skorGöster}</div>
+                            <div class="takim-ad takim-sag">${mac.deplasman}</div>
+                        </div>
+                    `;
+                });
+                document.getElementById('fikstur-loading').style.display = 'none';
+
+            } catch (error) {
+                console.error("Veri çekme hatası:", error);
+                document.getElementById('puan-loading').innerText = "Veriler yüklenirken hata oluştu!";
+                document.getElementById('fikstur-loading').innerText = "Fikstür yüklenirken hata oluştu!";
+            }
+        }
+
+        // Sayfa açıldığında verileri otomatik çek
+        window.onload = verileriGetir;
+    </script>
+</body>
+</html>
