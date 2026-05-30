@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EA FC 26 Turnuva Merkezi</title>
+    <title>GOAT LEAGUE | Turnuva Merkezi</title>
     <style>
         :root {
             --bg-color: #0d1117;
             --card-bg: #161b22;
-            --accent-color: #00f2fe;
+            --accent-color: #f1c40f; /* GOAT temasına uygun Altın/Sarı renk */
             --text-color: #c9d1d9;
             --text-bright: #ffffff;
             --border-color: #30363d;
@@ -23,7 +23,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            background: linear-gradient(135deg, #111, #2c3e50);
             padding: 30px 20px;
             text-align: center;
             border-bottom: 3px solid var(--accent-color);
@@ -32,11 +32,12 @@
 
         header h1 {
             margin: 0;
-            color: var(--text-bright);
-            font-size: 2.5rem;
+            color: var(--accent-color);
+            font-size: 3rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 242, 254, 0.6);
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(241, 196, 15, 0.4);
         }
 
         nav {
@@ -132,6 +133,7 @@
         .puan-kutusu {
             font-weight: bold;
             color: var(--accent-color);
+            font-size: 1.1rem;
         }
 
         /* Fikstür Kartları */
@@ -170,12 +172,13 @@
 
         .hafta-baslik {
             background-color: #1f1c2c;
-            color: var(--accent-color);
+            color: var(--text-bright);
             padding: 10px;
             border-radius: 6px;
             margin-top: 25px;
             font-weight: bold;
             text-align: center;
+            border-bottom: 2px solid var(--accent-color);
         }
 
         /* Video Bölümü */
@@ -236,7 +239,7 @@
 <body>
 
     <header>
-        <h1>EA FC 26 Şampiyonlar Ligi</h1>
+        <h1>GOAT LEAGUE</h1>
     </header>
 
     <nav>
@@ -250,7 +253,7 @@
         
         <div id="puan-durumu" class="tab-content active">
             <h2>Canlı Puan Durumu</h2>
-            <div id="puan-loading" class="loading">Veriler Google Sheets'ten yükleniyor...</div>
+            <div id="puan-loading" class="loading">Saha koşulları kontrol ediliyor...</div>
             <table id="puan-tablosu" style="display: none;">
                 <thead>
                     <tr>
@@ -262,7 +265,7 @@
                         <th>AG</th>
                         <th>YG</th>
                         <th>AV</th>
-                        <th>Puan</th>
+                        <th>P</th>
                     </tr>
                 </thead>
                 <tbody id="puan-body">
@@ -272,7 +275,7 @@
 
         <div id="fikstur" class="tab-content">
             <h2>Maç Fikstürü & Sonuçlar</h2>
-            <div id="fikstur-loading" class="loading">Fikstür yükleniyor...</div>
+            <div id="fikstur-loading" class="loading">Maç takvimi yükleniyor...</div>
             <div id="fikstur-alan">
                 </div>
         </div>
@@ -286,18 +289,8 @@
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
                     </div>
                     <div class="video-bilgi">
-                        <h4>1. Hafta: Önemli Anlar</h4>
-                        <p>Turnuvanın açılış haftasındaki muhteşem goller ve kritik kurtarışlar.</p>
-                    </div>
-                </div>
-
-                <div class="video-kart">
-                    <div class="video-konteyner">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-bilgi">
-                        <h4>Haftanın Golü</h4>
-                        <p>Uzaklardan doksana takılan o efsane golün tekrarı.</p>
+                        <h4>Açılış Günü Anları</h4>
+                        <p>GOAT League'in ilk maçlarındaki en kritik anlar.</p>
                     </div>
                 </div>
 
@@ -305,7 +298,7 @@
         </div>
 
         <div id="kurallar" class="tab-content">
-            <h2>Turnuva Kuralları</h2>
+            <h2>GOAT League Kuralları</h2>
             <div class="kural-listesi">
                 <ol>
                     <li>Maçlar EA FC 26 üzerinden "Klasik Maç" modunda oynanacaktır.</li>
@@ -332,11 +325,6 @@
         }
 
         async function verileriGetir() {
-            if(API_URL === "BURAYA_ALDIĞIN_LİNKİ_YAPIŞTIR") {
-                alert("Lütfen kodun içindeki API_URL kısmına Google Apps Script linkini yapıştırın!");
-                return;
-            }
-
             try {
                 const response = await fetch(API_URL);
                 const data = await response.json();
@@ -345,7 +333,7 @@
                 const puanBody = document.getElementById('puan-body');
                 puanBody.innerHTML = '';
                 
-                // Puanları en yüksekten en düşüğe sırala
+                // Puanları en yüksekten en düşüğe sırala (Puan eşitse averaja bak)
                 data.puanDurumu.sort((a, b) => b.puan - a.puan || b.av - a.av);
 
                 data.puanDurumu.forEach(item => {
@@ -372,17 +360,18 @@
                 let mevcutHafta = "";
 
                 data.fikstur.forEach(mac => {
+                    // Senin tablondaki GÜN sütununa uyum sağlandı
                     if(mac.hafta !== mevcutHafta) {
                         mevcutHafta = mac.hafta;
-                        fiksturAlan.innerHTML += `<div class="hafta-baslik">${mevcutHafta}. HAFTA</div>`;
+                        fiksturAlan.innerHTML += `<div class="hafta-baslik">${mevcutHafta}. GÜN</div>`;
                     }
 
-                    const skor Göster = mac.durum === "Oynandı" ? `${mac.evSkor} - ${mac.depSkor}` : "VS";
+                    const skorGoster = mac.durum === "Oynandı" ? `${mac.evSkor} - ${mac.depSkor}` : "VS";
 
                     fiksturAlan.innerHTML += `
                         <div class="mac-kart">
                             <div class="takim-ad takim-sol">${mac.evSahibi}</div>
-                            <div class="skor-alan">${skorGöster}</div>
+                            <div class="skor-alan">${skorGoster}</div>
                             <div class="takim-ad takim-sag">${mac.deplasman}</div>
                         </div>
                     `;
@@ -391,12 +380,11 @@
 
             } catch (error) {
                 console.error("Veri çekme hatası:", error);
-                document.getElementById('puan-loading').innerText = "Veriler yüklenirken hata oluştu!";
-                document.getElementById('fikstur-loading').innerText = "Fikstür yüklenirken hata oluştu!";
+                document.getElementById('puan-loading').innerText = "Veriler yüklenirken bir hata oluştu. Google Sheets bağlantısını kontrol edin.";
+                document.getElementById('fikstur-loading').innerText = "Fikstür yüklenirken bir hata oluştu.";
             }
         }
 
-        // Sayfa açıldığında verileri otomatik çek
         window.onload = verileriGetir;
     </script>
 </body>
