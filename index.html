@@ -159,13 +159,10 @@
             font-weight: 800; color: var(--accent-color); font-size: 1.2rem; background-color: rgba(212, 175, 55, 0.1);
         }
 
-        /* Lider Çizgisi (King's Cup Detayı) */
+        /* Lider Çizgisi (King's Cup Detayı) - 5. Sıra da artık aynı renk! */
         tr:nth-child(1) td:first-child { border-left: 4px solid #3498db; } /* Şampiyon Mavi Çizgi */
-        tr:nth-child(2) td:first-child, tr:nth-child(3) td:first-child, tr:nth-child(4) td:first-child {
+        tr:nth-child(2) td:first-child, tr:nth-child(3) td:first-child, tr:nth-child(4) td:first-child, tr:nth-child(5) td:first-child {
             border-left: 4px solid #7f8c8d; /* Play-Off Gri Çizgi */
-        }
-        tr:nth-child(5) td:first-child {
-            border-left: 4px solid #3b4252; /* Sonuncu Koyu Gri Çizgi */
         }
 
         .form-container { display: flex; gap: 5px; justify-content: center; }
@@ -186,9 +183,9 @@
         
         .mac-kart:hover { transform: scale(1.01); border-color: var(--accent-color); }
 
-        .takim-ad { flex: 1; font-weight: 600; font-size: 1.1rem; display: flex; align-items: center; }
-        .takim-sol { justify-content: flex-end; gap: 12px; padding-right: 20px; }
-        .takim-sag { justify-content: flex-start; gap: 12px; padding-left: 20px; }
+        .takim-ad { flex: 1; display: flex; align-items: center; }
+        .takim-sol { justify-content: flex-end; padding-right: 20px; }
+        .takim-sag { justify-content: flex-start; padding-left: 20px; }
 
         .skor-alan {
             background-color: #11151e; padding: 10px 15px; border-radius: 6px; font-weight: 800; font-size: 1.3rem;
@@ -223,7 +220,6 @@
 <body>
 
     <header>
-        <!-- Sol Üst Logo (Bunu turnuva_logo.png olarak Github'a yüklemen yeterli) -->
         <div style="position: absolute; left: 30px; top: 20px;">
             <img src="image7.jpg" alt="Turnuva Logosu" style="width: 80px; height: 80px; object-fit: contain;">
         </div>
@@ -231,7 +227,6 @@
         <h1>GOAT LEAGUE</h1>
         <p>JFK Sezonu | 1. Sezon</p>
 
-        <!-- Sağ Üst Bayrak ve Beta Yazısı -->
         <div style="position: absolute; right: 30px; top: 20px; text-align: center;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="TR Bayrak" style="width: 45px; border-radius: 3px; box-shadow: 0 4px 10px rgba(0,0,0,0.4);">
             <div style="color: var(--accent-color); font-size: 0.75rem; margin-top: 6px; font-weight: 800; letter-spacing: 1px;">BETA 0.1</div>
@@ -247,7 +242,6 @@
 
     <div class="container">
         
-        <!-- PUAN DURUMU SEKMESİ -->
         <div id="puan-durumu" class="tab-content active">
             <h2>Lig Tablosu</h2>
             <div id="puan-loading" class="loading">Sahaya iniliyor, veriler çekiliyor...</div>
@@ -261,7 +255,6 @@
                 <tbody id="puan-body"></tbody>
             </table>
             
-            <!-- Renklerin Anlamı (Legend) -->
             <div id="renk-aciklamalari" style="display: none; margin-top: 20px; justify-content: center; gap: 25px; font-size: 0.9rem; font-weight: 600;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <div style="width: 14px; height: 14px; background-color: #3498db; border-radius: 4px;"></div>
@@ -276,7 +269,6 @@
             <div class="sponsor-banner"><img id="reklam1" src="" alt="Sponsor"></div>
         </div>
 
-        <!-- FİKSTÜR SEKMESİ -->
         <div id="fikstur" class="tab-content">
             <h2>Maç Takvimi & Sonuçlar</h2>
             <div id="fikstur-loading" class="loading">Fikstür çekiliyor...</div>
@@ -284,7 +276,6 @@
             <div class="sponsor-banner"><img id="reklam2" src="" alt="Sponsor"></div>
         </div>
 
-        <!-- ÖZETLER SEKMESİ -->
         <div id="ozetler" class="tab-content">
             <h2>Jenerik & Özetler</h2>
             <div class="video-konteyner">
@@ -293,7 +284,6 @@
             <div class="sponsor-banner"><img id="reklam3" src="" alt="Sponsor"></div>
         </div>
 
-        <!-- KURALLAR SEKMESİ -->
         <div id="kurallar" class="tab-content">
             <h2>Lig Kuralları & Statü</h2>
             <div class="kural-listesi">
@@ -404,7 +394,7 @@
                 
                 document.getElementById('puan-loading').style.display = 'none';
                 document.getElementById('puan-tablosu').style.display = 'table';
-                document.getElementById('renk-aciklamalari').style.display = 'flex'; // Renk açıklamasını aç
+                document.getElementById('renk-aciklamalari').style.display = 'flex'; 
 
                 // --- FİKSTÜR BASIMI ---
                 const fiksturAlan = document.getElementById('fikstur-alan');
@@ -436,13 +426,15 @@
                     fiksturAlan.innerHTML += `
                         <div class="mac-kart">
                             <div class="takim-ad takim-sol">
-                                ${mac.evSahibi} <img src="${evLogo}" style="width:30px; height:30px; object-fit:contain;">
+                                <span style="font-size: 1.25rem; font-weight: 700;">${mac.evSahibi}</span> 
+                                <img src="${evLogo}" style="width:45px; height:45px; object-fit:contain; margin-left: 10px;">
                             </div>
                             <div class="skor-alan">
                                 ${skorGoster}
                             </div>
                             <div class="takim-ad takim-sag">
-                                <img src="${depLogo}" style="width:30px; height:30px; object-fit:contain;"> ${mac.deplasman}
+                                <img src="${depLogo}" style="width:45px; height:45px; object-fit:contain; margin-right: 10px;"> 
+                                <span style="font-size: 1.25rem; font-weight: 700;">${mac.deplasman}</span>
                             </div>
                         </div>
                     `;
