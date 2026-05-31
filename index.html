@@ -64,6 +64,7 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            flex-wrap: wrap;
         }
 
         nav button {
@@ -148,6 +149,22 @@
             margin-bottom: 25px;
             font-weight: 600;
             letter-spacing: 1px;
+        }
+
+        /* ŞAMPİYONLUK BANNER STİLİ */
+        .champion-banner {
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            display: none;
+            animation: fadeIn 0.6s ease;
         }
 
         table {
@@ -257,7 +274,6 @@
             z-index: 1; 
         }
 
-        /* YENİ MAÇKOLİK STİLİ: FLUSHING CANLI LOGOSU */
         .canli-badge {
             color: #e74c3c;
             font-size: 0.95rem;
@@ -271,6 +287,97 @@
             0% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.3; transform: scale(0.95); }
             100% { opacity: 1; transform: scale(1); }
+        }
+
+        .bracket-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            overflow-x: auto;
+            padding: 20px 0 40px 0;
+        }
+        
+        .bracket-column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+        }
+
+        .bracket-header {
+            text-align: center;
+            color: var(--text-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .bracket-match {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 240px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .bracket-match:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .bracket-match.final {
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+            transform: scale(1.05);
+        }
+
+        .bracket-match.final:hover {
+            transform: scale(1.08);
+        }
+
+        .bracket-team {
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+            color: var(--text-bright);
+        }
+
+        .bracket-team:last-child {
+            border-bottom: none;
+        }
+
+        .bracket-score {
+            background-color: #11151e;
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: var(--accent-color);
+            font-weight: bold;
+            border: 1px solid var(--border-color);
+        }
+
+        .bracket-team img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            margin-right: 8px;
+            border-radius: 50%;
+        }
+
+        .bracket-team.tbd {
+            color: #7f8c8d;
+            font-style: italic;
+            font-weight: normal;
         }
 
         .kural-listesi {
@@ -305,6 +412,7 @@
     <nav>
         <button class="active" onclick="switchTab('puan-durumu')">Puan Durumu</button>
         <button onclick="switchTab('fikstur')">Fikstür</button>
+        <button onclick="switchTab('efes-cup')">Efes Cup Play-Off</button>
         <button onclick="switchTab('ozetler')">Günün Anları</button>
         <button onclick="switchTab('kurallar')">Kurallar</button>
     </nav>
@@ -319,6 +427,8 @@
     <div class="container">
         
         <div id="puan-durumu" class="tab-content active">
+            <div id="champion-box" class="champion-banner"></div>
+
             <h2>Lig Tablosu</h2>
             <div id="puan-loading" class="loading">Sahaya iniliyor, veriler çekiliyor...</div>
             <table id="puan-tablosu" style="display: none;">
@@ -350,6 +460,39 @@
             <div id="fikstur-loading" class="loading">Fikstür çekiliyor...</div>
             <div id="fikstur-alan"></div>
             <div class="sponsor-banner"><img id="reklam2" src="" alt="Sponsor"></div>
+        </div>
+
+        <div id="efes-cup" class="tab-content">
+            <h2>Efes Cup | Şampiyonluk Yolu</h2>
+            
+            <div class="bracket-wrapper">
+                
+                <div class="bracket-column">
+                    <div class="bracket-header">Play-Off 1. Tur</div>
+                    <div class="bracket-match">
+                        <div class="bracket-team" id="bracket-p3"><span class="takim-ad-wrapper">Lig 3.sü</span> <span class="bracket-score">-</span></div>
+                        <div class="bracket-team" id="bracket-p4"><span class="takim-ad-wrapper">Lig 4.sü</span> <span class="bracket-score">-</span></div>
+                    </div>
+                </div>
+
+                <div class="bracket-column">
+                    <div class="bracket-header">Yarı Final</div>
+                    <div class="bracket-match">
+                        <div class="bracket-team" id="bracket-p2"><span class="takim-ad-wrapper">Lig 2.si</span> <span class="bracket-score">-</span></div>
+                        <div class="bracket-team tbd">1. Tur Galibi <span class="bracket-score">-</span></div>
+                    </div>
+                </div>
+
+                <div class="bracket-column">
+                    <div class="bracket-header" style="color: #3498db;">🏆 BÜYÜK FİNAL</div>
+                    <div class="bracket-match final">
+                        <div class="bracket-team" id="bracket-p1" style="color: var(--accent-color);"><span class="takim-ad-wrapper">Lig 1.si (Direkt Finalist)</span> <span class="bracket-score">-</span></div>
+                        <div class="bracket-team tbd">Yarı Final Galibi <span class="bracket-score">-</span></div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="sponsor-banner"><img id="reklam5" src="" alt="Sponsor"></div>
         </div>
 
         <div id="ozetler" class="tab-content">
@@ -398,11 +541,6 @@
         };
 
         const REKLAM_LINKI = "image6.png";
-        
-        document.getElementById('reklam1').src = REKLAM_LINKI;
-        document.getElementById('reklam2').src = REKLAM_LINKI;
-        document.getElementById('reklam3').src = REKLAM_LINKI;
-        document.getElementById('reklam4').src = REKLAM_LINKI;
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -440,6 +578,7 @@
                 const response = await fetch(API_URL);
                 const data = await response.json();
                 
+                // --- PUAN DURUMU ---
                 const puanBody = document.getElementById('puan-body');
                 puanBody.innerHTML = '';
                 data.puanDurumu.sort((a, b) => b.puan - a.puan || b.av - a.av);
@@ -465,6 +604,7 @@
                 document.getElementById('puan-tablosu').style.display = 'table';
                 document.getElementById('renk-aciklamalari').style.display = 'flex'; 
 
+                // --- FİKSTÜR BASIMI ---
                 const fiksturAlan = document.getElementById('fikstur-alan');
                 fiksturAlan.innerHTML = '';
                 let mevcutHafta = "";
@@ -478,11 +618,15 @@
                     let durumTemiz = String(mac.durum).trim().toLowerCase();
                     let skorGoster = "";
 
-                    // MAÇKOLİK SİSTEMİ: DURUM KONTROLÜ
                     if (durumTemiz === "oynandı") {
                         skorGoster = `${mac.evSkor} - ${mac.depSkor}`;
                     } else if (durumTemiz === "oynanıyor") {
-                        skorGoster = `<span class="canli-badge">🔴 CANLI</span>`;
+                        skorGoster = `
+                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1;">
+                                <span class="canli-badge" style="font-size: 0.7rem; margin-bottom: 4px;">🔴 CANLI</span>
+                                <span style="font-size: 1.3rem;">${mac.evSkor} - ${mac.depSkor}</span>
+                            </div>
+                        `;
                     } else {
                         let macTarihi = mac.durum;
                         if (macTarihi !== "VS") {
@@ -517,12 +661,45 @@
                 });
                 document.getElementById('fikstur-loading').style.display = 'none';
 
+                // --- LİG BİTTİ Mİ KONTROLÜ VE EFES CUP ENTEGRASYONU ---
+                // Fikstürdeki tüm maçlar "oynandı" durumundaysa true döner
+                let ligBittiMi = data.fikstur.every(m => String(m.durum).trim().toLowerCase() === "oynandı");
+                
+                if (ligBittiMi && data.puanDurumu.length >= 4) {
+                    let s1 = data.puanDurumu[0]; // Şampiyon
+                    let s2 = data.puanDurumu[1]; // 2.
+                    let s3 = data.puanDurumu[2]; // 3.
+                    let s4 = data.puanDurumu[3]; // 4.
+
+                    // 1. Şampiyonluk Panosunu Aç
+                    let champBox = document.getElementById('champion-box');
+                    let s1Logo = TAKIM_LOGOLARI[s1.takim] || "https://i.hizliresim.com/k9m6n02.png";
+                    champBox.innerHTML = `🏆 1. SEZON LİG ŞAMPİYONU: <img src="${s1Logo}" style="width:35px; height:35px; object-fit:contain; vertical-align:middle; margin: 0 10px;"> ${s1.takim} 🏆`;
+                    champBox.style.display = 'block';
+
+                    // 2. Efes Cup Ağacını Otomatik Takım İsimleriyle Doldur
+                    document.getElementById('bracket-p1').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${s1Logo}" style="vertical-align:middle;"> ${s1.takim}`;
+                    document.getElementById('bracket-p2').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${TAKIM_LOGOLARI[s2.takim] || ''}" style="vertical-align:middle;"> ${s2.takim}`;
+                    document.getElementById('bracket-p3').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${TAKIM_LOGOLARI[s3.takim] || ''}" style="vertical-align:middle;"> ${s3.takim}`;
+                    document.getElementById('bracket-p4').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${TAKIM_LOGOLARI[s4.takim] || ''}" style="vertical-align:middle;"> ${s4.takim}`;
+                }
+
             } catch (error) {
-                document.getElementById('puan-loading').innerText = "Veriler çekilirken hata oluştu. Linkleri kontrol edin.";
+                if (document.getElementById('puan-loading')) {
+                    document.getElementById('puan-loading').innerText = "Veriler çekilirken hata oluştu. Linkleri kontrol edin.";
+                }
             }
         }
 
-        window.onload = verileriGetir;
+        window.onload = function() {
+            if(document.getElementById('reklam1')) document.getElementById('reklam1').src = REKLAM_LINKI;
+            if(document.getElementById('reklam2')) document.getElementById('reklam2').src = REKLAM_LINKI;
+            if(document.getElementById('reklam3')) document.getElementById('reklam3').src = REKLAM_LINKI;
+            if(document.getElementById('reklam4')) document.getElementById('reklam4').src = REKLAM_LINKI;
+            if(document.getElementById('reklam5')) document.getElementById('reklam5').src = REKLAM_LINKI;
+            
+            verileriGetir();
+        };
     </script>
 </body>
 </html>
