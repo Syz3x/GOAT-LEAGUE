@@ -478,17 +478,11 @@
                     let durumTemiz = String(mac.durum).trim().toLowerCase();
                     let skorGoster = "";
 
-                   // MAÇKOLİK SİSTEMİ: DURUM KONTROLÜ
+                    // MAÇKOLİK SİSTEMİ: DURUM KONTROLÜ
                     if (durumTemiz === "oynandı") {
                         skorGoster = `${mac.evSkor} - ${mac.depSkor}`;
                     } else if (durumTemiz === "oynanıyor") {
-                        // CANLI maçta hem yanıp sönen yazıyı hem de anlık skoru alt alta gösteriyoruz
-                        skorGoster = `
-                            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1;">
-                                <span class="canli-badge" style="font-size: 0.7rem; margin-bottom: 4px;">🔴 CANLI</span>
-                                <span style="font-size: 1.3rem;">${mac.evSkor} - ${mac.depSkor}</span>
-                            </div>
-                        `;
+                        skorGoster = `<span class="canli-badge">🔴 CANLI</span>`;
                     } else {
                         let macTarihi = mac.durum;
                         if (macTarihi !== "VS") {
