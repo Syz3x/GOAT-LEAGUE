@@ -288,7 +288,7 @@
             100% { opacity: 1; transform: scale(1); }
         }
 
-        /* EFES CUP PLAY-OFF MEYDAN OKUMA AĞACI STİLLERİ */
+        /* EFES CUP AĞACI STİLLERİ */
         .bracket-wrapper {
             display: flex;
             align-items: center;
@@ -322,7 +322,7 @@
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            width: 240px;
+            width: 250px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             overflow: hidden;
             position: relative;
@@ -355,10 +355,6 @@
             color: var(--text-bright);
         }
 
-        .bracket-team:last-child {
-            border-bottom: none;
-        }
-
         .bracket-score {
             background-color: #11151e;
             padding: 4px 10px;
@@ -381,6 +377,18 @@
             color: #7f8c8d;
             font-style: italic;
             font-weight: normal;
+        }
+
+        .bracket-durum {
+            text-align: center;
+            background-color: #0d1117;
+            font-size: 0.75rem;
+            padding: 6px;
+            color: #f39c12; 
+            font-weight: 800;
+            border-top: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .kural-listesi {
@@ -415,7 +423,7 @@
     <nav>
         <button class="active" onclick="switchTab('puan-durumu')">Puan Durumu</button>
         <button onclick="switchTab('fikstur')">Fikstür</button>
-        <button onclick="switchTab('efes-cup')">Efes Cup Play-Off</button>
+        <button onclick="switchTab('efes-cup')">EFES CUP</button>
         <button onclick="switchTab('ozetler')">Günün Anları</button>
         <button onclick="switchTab('kurallar')">Kurallar</button>
     </nav>
@@ -429,6 +437,7 @@
 
     <div class="container">
         
+        <!-- PUAN DURUMU SEKMESİ -->
         <div id="puan-durumu" class="tab-content active">
             <div id="champion-box" class="champion-banner"></div>
 
@@ -458,6 +467,7 @@
             <div class="sponsor-banner"><img id="reklam1" src="" alt="Sponsor"></div>
         </div>
 
+        <!-- FİKSTÜR SEKMESİ -->
         <div id="fikstur" class="tab-content">
             <h2>Maç Takvimi & Sonuçlar</h2>
             <div id="fikstur-loading" class="loading">Fikstür çekiliyor...</div>
@@ -465,38 +475,46 @@
             <div class="sponsor-banner"><img id="reklam2" src="" alt="Sponsor"></div>
         </div>
 
+        <!-- EFES CUP SEKMESİ -->
         <div id="efes-cup" class="tab-content">
-            <h2>Efes Cup | Meydan Okuma Ağacı</h2>
+            <h2>EFES CUP</h2>
             
             <div class="bracket-wrapper">
                 
+                <!-- 1. Sütun: Play-Off 1. Tur -->
                 <div class="bracket-column">
                     <div class="bracket-header">Play-Off 1. Tur</div>
                     
                     <div class="bracket-match">
-                        <div class="bracket-team" id="bracket-p2"><span class="takim-ad-wrapper">Lig 2.si</span> <span class="bracket-score">-</span></div>
-                        <div class="bracket-team" id="bracket-p4"><span class="takim-ad-wrapper">Lig 4.sü</span> <span class="bracket-score">-</span></div>
+                        <div class="bracket-team" id="bracket-p2-ev"><span class="takim-ad-wrapper">Lig 2.si</span> <span class="bracket-score" id="score-t1m1-ev">-</span></div>
+                        <div class="bracket-team" id="bracket-p2-dep"><span class="takim-ad-wrapper">Lig 4.sü</span> <span class="bracket-score" id="score-t1m1-dep">-</span></div>
+                        <div class="bracket-durum" id="status-t1m1">Bekleniyor</div>
                     </div>
 
                     <div class="bracket-match">
-                        <div class="bracket-team" id="bracket-p3"><span class="takim-ad-wrapper">Lig 3.sü</span> <span class="bracket-score">-</span></div>
-                        <div class="bracket-team" id="bracket-p5"><span class="takim-ad-wrapper">Lig 5.si</span> <span class="bracket-score">-</span></div>
+                        <div class="bracket-team" id="bracket-p3-ev"><span class="takim-ad-wrapper">Lig 3.sü</span> <span class="bracket-score" id="score-t1m2-ev">-</span></div>
+                        <div class="bracket-team" id="bracket-p3-dep"><span class="takim-ad-wrapper">Lig 5.si</span> <span class="bracket-score" id="score-t1m2-dep">-</span></div>
+                        <div class="bracket-durum" id="status-t1m2">Bekleniyor</div>
                     </div>
                 </div>
 
+                <!-- 2. Sütun: Yarı Final -->
                 <div class="bracket-column">
                     <div class="bracket-header">Yarı Final</div>
                     <div class="bracket-match">
-                        <div class="bracket-team tbd"><span class="takim-ad-wrapper">1. Maç Galibi</span> <span class="bracket-score">-</span></div>
-                        <div class="bracket-team tbd"><span class="takim-ad-wrapper">2. Maç Galibi</span> <span class="bracket-score">-</span></div>
+                        <div class="bracket-team" id="bracket-yf-ev"><span class="takim-ad-wrapper tbd">1. Maç Galibi</span> <span class="bracket-score" id="score-yf-ev">-</span></div>
+                        <div class="bracket-team" id="bracket-yf-dep"><span class="takim-ad-wrapper tbd">2. Maç Galibi</span> <span class="bracket-score" id="score-yf-dep">-</span></div>
+                        <div class="bracket-durum" id="status-yf">Bekleniyor</div>
                     </div>
                 </div>
 
+                <!-- 3. Sütun: BÜYÜK FİNAL -->
                 <div class="bracket-column">
                     <div class="bracket-header" style="color: #3498db;">🏆 BÜYÜK FİNAL</div>
                     <div class="bracket-match final">
-                        <div class="bracket-team" id="bracket-p1" style="color: var(--accent-color);"><span class="takim-ad-wrapper">Lig 1.si (Direkt Finalist)</span> <span class="bracket-score">-</span></div>
-                        <div class="bracket-team tbd"><span class="takim-ad-wrapper">Yarı Final Galibi</span> <span class="bracket-score">-</span></div>
+                        <div class="bracket-team" id="bracket-fin-ev" style="color: var(--accent-color);"><span class="takim-ad-wrapper">Lig 1.si (Direkt Finalist)</span> <span class="bracket-score" id="score-fin-ev">-</span></div>
+                        <div class="bracket-team" id="bracket-fin-dep"><span class="takim-ad-wrapper tbd">Yarı Final Galibi</span> <span class="bracket-score" id="score-fin-dep">-</span></div>
+                        <div class="bracket-durum" id="status-fin">Bekleniyor</div>
                     </div>
                 </div>
                 
@@ -504,6 +522,7 @@
             <div class="sponsor-banner"><img id="reklam5" src="" alt="Sponsor"></div>
         </div>
 
+        <!-- ÖZETLER SEKMESİ -->
         <div id="ozetler" class="tab-content">
             <h2>Jenerik & Özetler</h2>
             <div class="video-konteyner">
@@ -512,6 +531,7 @@
             <div class="sponsor-banner"><img id="reklam3" src="" alt="Sponsor"></div>
         </div>
 
+        <!-- KURALLAR SEKMESİ -->
         <div id="kurallar" class="tab-content">
             <h2>Lig Kuralları & Statü</h2>
             <div class="kural-listesi">
@@ -587,7 +607,6 @@
                 const response = await fetch(API_URL);
                 const data = await response.json();
                 
-                // --- PUAN DURUMU ---
                 const puanBody = document.getElementById('puan-body');
                 puanBody.innerHTML = '';
                 data.puanDurumu.sort((a, b) => b.puan - a.puan || b.av - a.av);
@@ -613,12 +632,16 @@
                 document.getElementById('puan-tablosu').style.display = 'table';
                 document.getElementById('renk-aciklamalari').style.display = 'flex'; 
 
-                // --- FİKSTÜR BASIMI ---
+                // LİGİ VE EFES CUP'I AYIR (Kodlara göre)
+                let normalFikstur = data.fikstur.filter(m => !String(m.hafta).toUpperCase().includes('EFES'));
+                let efesFikstur = data.fikstur.filter(m => String(m.hafta).toUpperCase().includes('EFES'));
+
+                // --- NORMAL LİG FİKSTÜRÜ BASIMI ---
                 const fiksturAlan = document.getElementById('fikstur-alan');
                 fiksturAlan.innerHTML = '';
                 let mevcutHafta = "";
 
-                data.fikstur.forEach(mac => {
+                normalFikstur.forEach(mac => {
                     if(mac.hafta !== mevcutHafta) {
                         mevcutHafta = mac.hafta;
                         fiksturAlan.innerHTML += `<div class="hafta-baslik">-- ${mevcutHafta}. GÜN --</div>`;
@@ -670,29 +693,83 @@
                 });
                 document.getElementById('fikstur-loading').style.display = 'none';
 
-                // --- LİG BİTTİ Mİ KONTROLÜ VE OTOMATİK 5'Lİ GAUNTLET BAĞLANTISI ---
-                let ligBittiMi = data.fikstur.every(m => String(m.durum).trim().toLowerCase() === "oynandı");
+                // --- YAPAY ZEKA HAKEM: KAZANANLARI OTOMATİK HESAPLAMA ---
+                let ligBittiMi = normalFikstur.length > 0 && normalFikstur.every(m => String(m.durum).trim().toLowerCase() === "oynandı");
                 
+                let t1 = "Lig 1.si", t2 = "Lig 2.si", t3 = "Lig 3.sü", t4 = "Lig 4.sü", t5 = "Lig 5.si";
+
+                // 1. Puan Tablosundan Sıralamayı Çek
                 if (ligBittiMi && data.puanDurumu.length >= 5) {
-                    let s1 = data.puanDurumu[0]; // 1. (Direkt Final)
-                    let s2 = data.puanDurumu[1]; // 2. (Tur 1)
-                    let s3 = data.puanDurumu[2]; // 3. (Tur 1)
-                    let s4 = data.puanDurumu[3]; // 4. (Tur 1)
-                    let s5 = data.puanDurumu[4]; // 5. (Tur 1)
-
-                    // 1. Şampiyonluk Panosunu Aç
+                    t1 = data.puanDurumu[0].takim;
+                    t2 = data.puanDurumu[1].takim;
+                    t3 = data.puanDurumu[2].takim;
+                    t4 = data.puanDurumu[3].takim;
+                    t5 = data.puanDurumu[4].takim;
+                    
                     let champBox = document.getElementById('champion-box');
-                    let s1Logo = TAKIM_LOGOLARI[s1.takim] || "https://i.hizliresim.com/k9m6n02.png";
-                    champBox.innerHTML = `🏆 1. SEZON LİG ŞAMPİYONU: <img src="${s1Logo}" style="width:35px; height:35px; object-fit:contain; vertical-align:middle; margin: 0 10px;"> ${s1.takim} 🏆`;
+                    let s1Logo = TAKIM_LOGOLARI[t1] || "https://i.hizliresim.com/k9m6n02.png";
+                    champBox.innerHTML = `🏆 1. SEZON LİG ŞAMPİYONU: <img src="${s1Logo}" style="width:35px; height:35px; object-fit:contain; vertical-align:middle; margin: 0 10px;"> ${t1} 🏆`;
                     champBox.style.display = 'block';
-
-                    // 2. Efes Cup 5'li Meydan Okuma Ağacını Doldur
-                    document.getElementById('bracket-p1').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${s1Logo}"> ${s1.takim}`;
-                    document.getElementById('bracket-p2').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${TAKIM_LOGOLARI[s2.takim] || 'https://i.hizliresim.com/k9m6n02.png'}"> ${s2.takim}`;
-                    document.getElementById('bracket-p3').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${TAKIM_LOGOLARI[s3.takim] || 'https://i.hizliresim.com/k9m6n02.png'}"> ${s3.takim}`;
-                    document.getElementById('bracket-p4').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${TAKIM_LOGOLARI[s4.takim] || 'https://i.hizliresim.com/k9m6n02.png'}"> ${s4.takim}`;
-                    document.getElementById('bracket-p5').querySelector('.takim-ad-wrapper').innerHTML = `<img src="${TAKIM_LOGOLARI[s5.takim] || 'https://i.hizliresim.com/k9m6n02.png'}"> ${s5.takim}`;
                 }
+
+                // Kazananı Bulan Yapay Zeka Fonksiyonu
+                function getWinner(haftaKodu, evTakim, depTakim) {
+                    let mac = efesFikstur.find(m => String(m.hafta).toUpperCase() === haftaKodu);
+                    if(!mac || String(mac.durum).trim().toLowerCase() !== "oynandı") return null;
+                    let eS = parseInt(mac.evSkor);
+                    let dS = parseInt(mac.depSkor);
+                    if(eS > dS) return evTakim;
+                    if(dS > eS) return depTakim;
+                    return null; // Beraberlik durumunda
+                }
+
+                // 2. Oynanan Maçların Kazananlarını Hesapla
+                let w_t1m1 = getWinner("EFES-T1-M1", t2, t4) || "1. Maç Galibi";
+                let w_t1m2 = getWinner("EFES-T1-M2", t3, t5) || "2. Maç Galibi";
+                let w_yf   = getWinner("EFES-YF", w_t1m1, w_t1m2) || "Yarı Final Galibi";
+
+                // 3. Efes Cup Tablosuna Çizdirme Fonksiyonu
+                function efesMacCiz(haftaKodu, evId, depId, skorEvId, skorDepId, durumId, guncelEv, guncelDep) {
+                    let mac = efesFikstur.find(m => String(m.hafta).toUpperCase() === haftaKodu) || {evSkor: "-", depSkor: "-", durum: "Bekleniyor"};
+                    
+                    let evLogo = TAKIM_LOGOLARI[guncelEv];
+                    let depLogo = TAKIM_LOGOLARI[guncelDep];
+                    
+                    let evIsimHtml = evLogo ? `<img src="${evLogo}"> ${guncelEv}` : `${guncelEv}`;
+                    let depIsimHtml = depLogo ? `<img src="${depLogo}"> ${guncelDep}` : `${guncelDep}`;
+                    
+                    let evEl = document.getElementById(evId).querySelector('.takim-ad-wrapper');
+                    let depEl = document.getElementById(depId).querySelector('.takim-ad-wrapper');
+                    
+                    evEl.innerHTML = evIsimHtml;
+                    depEl.innerHTML = depIsimHtml;
+                    
+                    if(!guncelEv.includes("Galibi") && !guncelEv.includes("Lig")) { evEl.style.color = "var(--text-bright)"; evEl.style.fontStyle = "normal"; }
+                    if(!guncelDep.includes("Galibi") && !guncelDep.includes("Lig")) { depEl.style.color = "var(--text-bright)"; depEl.style.fontStyle = "normal"; }
+
+                    document.getElementById(skorEvId).innerText = mac.evSkor !== "" ? mac.evSkor : "-";
+                    document.getElementById(skorDepId).innerText = mac.depSkor !== "" ? mac.depSkor : "-";
+                    
+                    let durumEl = document.getElementById(durumId);
+                    let d = String(mac.durum).trim().toLowerCase();
+                    
+                    if (d === "oynandı") {
+                        durumEl.innerText = "OYNANDI";
+                        durumEl.style.color = "#27ae60";
+                    } else if (d === "oynanıyor") {
+                        durumEl.innerHTML = '<span class="canli-badge">🔴 CANLI</span>';
+                        durumEl.style.color = "#e74c3c";
+                    } else {
+                        durumEl.innerText = mac.durum ? mac.durum : "Bekleniyor"; 
+                        durumEl.style.color = "#f39c12";
+                    }
+                }
+
+                // 4. Eşleşmeleri ve Hesaplanan Kazananları Ağaca Yerleştir
+                efesMacCiz("EFES-T1-M1", 'bracket-p2-ev', 'bracket-p2-dep', 'score-t1m1-ev', 'score-t1m1-dep', 'status-t1m1', t2, t4);
+                efesMacCiz("EFES-T1-M2", 'bracket-p3-ev', 'bracket-p3-dep', 'score-t1m2-ev', 'score-t1m2-dep', 'status-t1m2', t3, t5);
+                efesMacCiz("EFES-YF", 'bracket-yf-ev', 'bracket-yf-dep', 'score-yf-ev', 'score-yf-dep', 'status-yf', w_t1m1, w_t1m2);
+                efesMacCiz("EFES-FİN", 'bracket-fin-ev', 'bracket-fin-dep', 'score-fin-ev', 'score-fin-dep', 'status-fin', t1, w_yf);
 
             } catch (error) {
                 if (document.getElementById('puan-loading')) {
