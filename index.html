@@ -86,9 +86,52 @@
             background-color: rgba(255,255,255,0.03);
         }
 
+        /* YENİ: DİNAMİK GERİ SAYIM SAYACI */
+        .countdown-banner {
+            background-color: #0a0d14;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 2px solid; 
+            transition: color 1s ease, text-shadow 1s ease, border-bottom-color 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            z-index: 99;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
+        }
+
+        .hourglass-spin {
+            display: inline-block;
+            animation: kumSaati 4s ease-in-out infinite;
+        }
+
+        @keyframes kumSaati {
+            0% { transform: rotate(0deg); }
+            45% { transform: rotate(180deg); }
+            50% { transform: rotate(180deg); }
+            95% { transform: rotate(360deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .pulse-anim {
+            animation: kalpAtisi 1s infinite;
+        }
+
+        @keyframes kalpAtisi {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* HABER BANDI */
         .news-ticker-container {
             background-color: #0d1117;
-            border-bottom: 1px solid var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             overflow: hidden;
@@ -212,9 +255,7 @@
         }
 
         tr:nth-child(1) td:first-child { border-left: 4px solid #3498db; }
-        tr:nth-child(n+2):nth-child(-n+5) td:first-child {
-            border-left: 4px solid #7f8c8d; 
-        }
+        tr:nth-child(n+2):nth-child(-n+5) td:first-child { border-left: 4px solid #7f8c8d; }
 
         .form-container { display: flex; gap: 5px; justify-content: center; }
         .form-badge {
@@ -252,34 +293,20 @@
         .video-konteyner {
             position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden;
             box-shadow: 0 0 50px rgba(212, 175, 55, 0.15), 0 20px 40px rgba(0,0,0,0.8);
-            border: 2px solid var(--accent-color);
-            background-color: #000;
+            border: 2px solid var(--accent-color); background-color: #000;
         }
 
         .video-konteyner::before {
-            content: ''; 
-            position: absolute; 
-            top: -50%; left: -50%; 
-            width: 200%; height: 200%;
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(0,0,0,0) 60%);
-            z-index: 0; 
-            pointer-events: none;
+            z-index: 0; pointer-events: none;
         }
 
-        .video-konteyner iframe { 
-            position: absolute; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            z-index: 1; 
-        }
+        .video-konteyner iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 
         .canli-badge {
-            color: #e74c3c;
-            font-size: 0.95rem;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            animation: macBlink 1.2s infinite;
-            text-transform: uppercase;
+            color: #e74c3c; font-size: 0.95rem; font-weight: 900; letter-spacing: 1.5px;
+            animation: macBlink 1.2s infinite; text-transform: uppercase;
         }
 
         @keyframes macBlink {
@@ -290,105 +317,41 @@
 
         /* EFES CUP AĞACI STİLLERİ */
         .bracket-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
-            overflow-x: auto;
-            padding: 20px 0 40px 0;
+            display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: 30px; overflow-x: auto; padding: 20px 0 40px 0;
         }
         
         .bracket-column {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            position: relative;
-            justify-content: center;
-            min-height: 320px;
+            display: flex; flex-direction: column; gap: 25px; position: relative; justify-content: center; min-height: 320px;
         }
 
         .bracket-header {
-            text-align: center;
-            color: var(--text-color);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            margin-bottom: 5px;
+            text-align: center; color: var(--text-color); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 5px;
         }
 
         .bracket-match {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            width: 250px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
+            background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; width: 250px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); overflow: hidden; position: relative; transition: all 0.3s ease;
         }
 
-        .bracket-match:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .bracket-match.final {
-            border: 2px solid var(--accent-color);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
-            transform: scale(1.05);
-        }
-
-        .bracket-match.final:hover {
-            transform: scale(1.08);
-        }
+        .bracket-match:hover { border-color: var(--accent-color); transform: translateY(-2px); }
+        .bracket-match.final { border: 2px solid var(--accent-color); box-shadow: 0 0 25px rgba(212, 175, 55, 0.15); transform: scale(1.05); }
+        .bracket-match.final:hover { transform: scale(1.08); }
 
         .bracket-team {
-            padding: 12px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-            color: var(--text-bright);
+            padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 600;
+            border-bottom: 1px solid var(--border-color); font-size: 0.95rem; color: var(--text-bright);
         }
 
         .bracket-score {
-            background-color: #11151e;
-            padding: 4px 10px;
-            border-radius: 4px;
-            color: var(--accent-color);
-            font-weight: bold;
-            border: 1px solid var(--border-color);
+            background-color: #11151e; padding: 4px 10px; border-radius: 4px; color: var(--accent-color); font-weight: bold; border: 1px solid var(--border-color);
         }
 
-        .bracket-team img {
-            width: 22px;
-            height: 22px;
-            object-fit: contain;
-            margin-right: 8px;
-            border-radius: 50%;
-            vertical-align: middle;
-        }
-
-        .bracket-team.tbd {
-            color: #7f8c8d;
-            font-style: italic;
-            font-weight: normal;
-        }
+        .bracket-team img { width: 22px; height: 22px; object-fit: contain; margin-right: 8px; border-radius: 50%; vertical-align: middle; }
+        .bracket-team.tbd { color: #7f8c8d; font-style: italic; font-weight: normal; }
 
         .bracket-durum {
-            text-align: center;
-            background-color: #0d1117;
-            font-size: 0.75rem;
-            padding: 6px;
-            color: #f39c12; 
-            font-weight: 800;
-            border-top: 1px solid var(--border-color);
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            text-align: center; background-color: #0d1117; font-size: 0.75rem; padding: 6px; color: #f39c12; 
+            font-weight: 800; border-top: 1px solid var(--border-color); text-transform: uppercase; letter-spacing: 1px;
         }
 
         .kural-listesi {
@@ -416,7 +379,7 @@
 
         <div style="position: absolute; right: 30px; top: 20px; text-align: center;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="TR Bayrak" style="width: 45px; border-radius: 3px; box-shadow: 0 4px 10px rgba(0,0,0,0.4);">
-            <div style="color: var(--accent-color); font-size: 0.75rem; margin-top: 6px; font-weight: 800; letter-spacing: 1px;">BETA 0.1</div>
+            <div style="color: var(--accent-color); font-size: 0.75rem; margin-top: 6px; font-weight: 800; letter-spacing: 1px;">BETA 0.2</div>
         </div>
     </header>
 
@@ -428,10 +391,16 @@
         <button onclick="switchTab('kurallar')">Kurallar</button>
     </nav>
 
+    <!-- YENİ: DİNAMİK RENKLİ GERİ SAYIM SAYACI -->
+    <div id="countdown-banner" class="countdown-banner">
+        <span class="hourglass-spin" id="hourglass-icon">⏳</span>
+        <span id="countdown-text">GOAT LEAGUE BAŞLIYOR: HESAPLANIYOR...</span>
+    </div>
+
     <div class="news-ticker-container">
         <div class="news-ticker-title">SON DAKİKA</div>
         <div class="news-content">
-            🔥 GOAT LEAGUE 1. Sezon gümbür gümbür başladı! &nbsp;&nbsp;|&nbsp;&nbsp; 🏆 Şampiyonluk kupası EFES CUP sahibini bekliyor... &nbsp;&nbsp;|&nbsp;&nbsp; ⚽ Fikstür açıklandı, takımlar sahaya inmek için gün sayıyor!
+            🔥 GOAT LEAGUE 1. Sezon heyecanı dorukta! &nbsp;&nbsp;|&nbsp;&nbsp; 🏆 Şampiyonluk kupası EFES CUP sahibini bekliyor... &nbsp;&nbsp;|&nbsp;&nbsp; ⚽ Fikstür açıklandı, takımlar sahaya inmek için gün sayıyor!
         </div>
     </div>
 
@@ -481,16 +450,13 @@
             
             <div class="bracket-wrapper">
                 
-                <!-- 1. Sütun: Play-Off 1. Tur -->
                 <div class="bracket-column">
                     <div class="bracket-header">Play-Off 1. Tur</div>
-                    
                     <div class="bracket-match">
                         <div class="bracket-team" id="bracket-p2-ev"><span class="takim-ad-wrapper">Lig 2.si</span> <span class="bracket-score" id="score-t1m1-ev">-</span></div>
                         <div class="bracket-team" id="bracket-p2-dep"><span class="takim-ad-wrapper">Lig 4.sü</span> <span class="bracket-score" id="score-t1m1-dep">-</span></div>
                         <div class="bracket-durum" id="status-t1m1">Bekleniyor</div>
                     </div>
-
                     <div class="bracket-match">
                         <div class="bracket-team" id="bracket-p3-ev"><span class="takim-ad-wrapper">Lig 3.sü</span> <span class="bracket-score" id="score-t1m2-ev">-</span></div>
                         <div class="bracket-team" id="bracket-p3-dep"><span class="takim-ad-wrapper">Lig 5.si</span> <span class="bracket-score" id="score-t1m2-dep">-</span></div>
@@ -498,7 +464,6 @@
                     </div>
                 </div>
 
-                <!-- 2. Sütun: Yarı Final -->
                 <div class="bracket-column">
                     <div class="bracket-header">Yarı Final</div>
                     <div class="bracket-match">
@@ -508,7 +473,6 @@
                     </div>
                 </div>
 
-                <!-- 3. Sütun: BÜYÜK FİNAL -->
                 <div class="bracket-column">
                     <div class="bracket-header" style="color: #3498db;">🏆 BÜYÜK FİNAL</div>
                     <div class="bracket-match final">
@@ -579,6 +543,67 @@
             event.currentTarget.classList.add('active');
         }
 
+        // YENİ: DİNAMİK GERİ SAYIM FONKSİYONU
+        function baslangicSayaci() {
+            // Hedef Tarih: 5 Haziran 2026, 22:45:00
+            const targetDate = new Date("June 5, 2026 22:45:00").getTime();
+            // Başlangıç Referansı (Renk hesaplaması için, örneğin projeye başladığımız şu an)
+            const startDate = new Date("June 2, 2026 00:00:00").getTime();
+            const totalDuration = targetDate - startDate;
+
+            const banner = document.getElementById("countdown-banner");
+            const textEl = document.getElementById("countdown-text");
+            const iconEl = document.getElementById("hourglass-icon");
+
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    banner.style.color = "var(--accent-color)";
+                    banner.style.borderBottomColor = "var(--accent-color)";
+                    banner.style.textShadow = "0 0 15px var(--accent-color)";
+                    iconEl.innerHTML = "🏆";
+                    iconEl.classList.remove("hourglass-spin", "pulse-anim");
+                    textEl.innerHTML = "GOAT LEAGUE BAŞLADI!";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                textEl.innerHTML = `GOAT LEAGUE BAŞLIYOR: ${days}G ${hours}S ${minutes}D ${seconds}SN`;
+
+                // Renk Algoritması (Yeşil -> Sarı -> Kırmızı)
+                let percent = Math.max(0, Math.min(1, distance / totalDuration));
+                let r, g;
+                
+                if (percent > 0.5) {
+                    // Yeşil'den Sarı'ya geçiş
+                    r = Math.floor(255 * (1 - (percent - 0.5) * 2)); 
+                    g = 255;
+                } else {
+                    // Sarı'dan Kırmızı'ya geçiş
+                    r = 255;
+                    g = Math.floor(255 * (percent * 2)); 
+                }
+                
+                const currentColor = `rgb(${r}, ${g}, 0)`;
+                banner.style.color = currentColor;
+                banner.style.borderBottomColor = currentColor;
+                banner.style.textShadow = `0 0 15px rgba(${r}, ${g}, 0, 0.5)`;
+
+                // Son 1 saat (3600000 ms) kala kalp atışı efekti başlasın
+                if (distance < 3600000 && !banner.classList.contains("pulse-anim")) {
+                    banner.classList.add("pulse-anim");
+                    iconEl.classList.remove("hourglass-spin");
+                }
+            }, 1000);
+        }
+
         function getFormGrafigi(takim, fiksturData) {
             let oynananMaclar = fiksturData.filter(m => String(m.durum).trim().toLowerCase() === "oynandı" && (m.evSahibi === takim || m.deplasman === takim));
             let son3Mac = oynananMaclar.slice(-3);
@@ -632,11 +657,9 @@
                 document.getElementById('puan-tablosu').style.display = 'table';
                 document.getElementById('renk-aciklamalari').style.display = 'flex'; 
 
-                // LİGİ VE EFES CUP'I AYIR (Kodlara göre)
                 let normalFikstur = data.fikstur.filter(m => !String(m.hafta).toUpperCase().includes('EFES'));
                 let efesFikstur = data.fikstur.filter(m => String(m.hafta).toUpperCase().includes('EFES'));
 
-                // --- NORMAL LİG FİKSTÜRÜ BASIMI ---
                 const fiksturAlan = document.getElementById('fikstur-alan');
                 fiksturAlan.innerHTML = '';
                 let mevcutHafta = "";
@@ -693,12 +716,10 @@
                 });
                 document.getElementById('fikstur-loading').style.display = 'none';
 
-                // --- YAPAY ZEKA HAKEM: KAZANANLARI OTOMATİK HESAPLAMA ---
                 let ligBittiMi = normalFikstur.length > 0 && normalFikstur.every(m => String(m.durum).trim().toLowerCase() === "oynandı");
                 
                 let t1 = "Lig 1.si", t2 = "Lig 2.si", t3 = "Lig 3.sü", t4 = "Lig 4.sü", t5 = "Lig 5.si";
 
-                // 1. Puan Tablosundan Sıralamayı Çek
                 if (ligBittiMi && data.puanDurumu.length >= 5) {
                     t1 = data.puanDurumu[0].takim;
                     t2 = data.puanDurumu[1].takim;
@@ -712,7 +733,6 @@
                     champBox.style.display = 'block';
                 }
 
-                // Kazananı Bulan Yapay Zeka Fonksiyonu
                 function getWinner(haftaKodu, evTakim, depTakim) {
                     let mac = efesFikstur.find(m => String(m.hafta).toUpperCase() === haftaKodu);
                     if(!mac || String(mac.durum).trim().toLowerCase() !== "oynandı") return null;
@@ -720,15 +740,13 @@
                     let dS = parseInt(mac.depSkor);
                     if(eS > dS) return evTakim;
                     if(dS > eS) return depTakim;
-                    return null; // Beraberlik durumunda
+                    return null; 
                 }
 
-                // 2. Oynanan Maçların Kazananlarını Hesapla
                 let w_t1m1 = getWinner("EFES-T1-M1", t2, t4) || "1. Maç Galibi";
                 let w_t1m2 = getWinner("EFES-T1-M2", t3, t5) || "2. Maç Galibi";
                 let w_yf   = getWinner("EFES-YF", w_t1m1, w_t1m2) || "Yarı Final Galibi";
 
-                // 3. Efes Cup Tablosuna Çizdirme Fonksiyonu
                 function efesMacCiz(haftaKodu, evId, depId, skorEvId, skorDepId, durumId, guncelEv, guncelDep) {
                     let mac = efesFikstur.find(m => String(m.hafta).toUpperCase() === haftaKodu) || {evSkor: "-", depSkor: "-", durum: "Bekleniyor"};
                     
@@ -765,7 +783,6 @@
                     }
                 }
 
-                // 4. Eşleşmeleri ve Hesaplanan Kazananları Ağaca Yerleştir
                 efesMacCiz("EFES-T1-M1", 'bracket-p2-ev', 'bracket-p2-dep', 'score-t1m1-ev', 'score-t1m1-dep', 'status-t1m1', t2, t4);
                 efesMacCiz("EFES-T1-M2", 'bracket-p3-ev', 'bracket-p3-dep', 'score-t1m2-ev', 'score-t1m2-dep', 'status-t1m2', t3, t5);
                 efesMacCiz("EFES-YF", 'bracket-yf-ev', 'bracket-yf-dep', 'score-yf-ev', 'score-yf-dep', 'status-yf', w_t1m1, w_t1m2);
@@ -785,6 +802,7 @@
             if(document.getElementById('reklam4')) document.getElementById('reklam4').src = REKLAM_LINKI;
             if(document.getElementById('reklam5')) document.getElementById('reklam5').src = REKLAM_LINKI;
             
+            baslangicSayaci();
             verileriGetir();
         };
     </script>
