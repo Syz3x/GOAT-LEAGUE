@@ -163,7 +163,8 @@
                 
                 <input type="text" id="auth-nick" class="auth-input" placeholder="Kullanıcı Adı / Takım Adı">
                 <input type="password" id="auth-sifre" class="auth-input" placeholder="Basit Şifre">
-                <input type="text" id="auth-kod" class="auth-input" placeholder="Davet Kodu (Örn: goat2026)" style="border-color: var(--accent-color);">
+                <!-- DÜZELTME BURADA: Örnek şifre metni tamamen kaldırıldı -->
+                <input type="text" id="auth-kod" class="auth-input" placeholder="Davet Kodu" style="border-color: var(--accent-color);">
                 
                 <button class="auth-btn" onclick="sistemeGirisYap()">Sisteme Gir</button>
             </div>
@@ -214,7 +215,6 @@
                         <div class="yorum-text">İyi oynayan kazansın, maç sonu analizleri buraya!</div>
                     </div>
                     
-                    <!-- DİNAMİK YORUM ALANI -->
                     <div id="dinamik-yorum-alani"></div>
                 </div>
             </div>
@@ -285,13 +285,11 @@
                 return;
             }
 
-            // İŞTE İSTEDİĞİN GÜVENLİK DUVARI:
             if (kod !== DAVET_KODU) {
                 alert("⛔ HATALI DAVET KODU! Turnuvaya kayıtlı değilseniz sisteme giremezsiniz.");
                 return;
             }
 
-            // Başarılı giriş
             localStorage.setItem("goat_kullanici", nick);
             alert("Sisteme hoş geldin, " + nick + "!");
             kapatAuthModal();
@@ -303,7 +301,7 @@
             document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
-            oturumKontrol(); // Buton stili bozulmasın diye tekrar çağırıyoruz
+            oturumKontrol(); 
         }
 
         // --- MAÇ MODALI FONKSİYONLARI ---
@@ -320,13 +318,11 @@
             let skorMetni = (evSkor === "" || evSkor === undefined) ? "VS" : evSkor + " - " + depSkor;
             document.getElementById('modal-skor').innerText = skorMetni;
             
-            // İstatistikleri rastgele atama (Demo)
             document.getElementById('st-top-e').innerText = Math.floor(Math.random() * 20 + 40);
             document.getElementById('st-top-d').innerText = 100 - parseInt(document.getElementById('st-top-e').innerText);
             document.getElementById('st-sut-e').innerText = Math.floor(Math.random() * 15); document.getElementById('st-sut-d').innerText = Math.floor(Math.random() * 15);
             document.getElementById('st-kirmizi-e').innerText = Math.floor(Math.random() * 2); document.getElementById('st-kirmizi-d').innerText = Math.floor(Math.random() * 2);
 
-            // FORUM KONTROLÜ
             let yorumAlani = document.getElementById("dinamik-yorum-alani");
             let aktifKullanici = localStorage.getItem("goat_kullanici");
 
