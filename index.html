@@ -7,8 +7,10 @@
     <style>
         :root { --bg-color: #161a25; --card-bg: #1f2533; --accent-color: #d4af37; --text-color: #e8e3d3; --text-bright: #ffffff; --border-color: #2c3545; }
         
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; background-image: radial-gradient(circle at top, #1f2533 0%, #161a25 100%); min-height: 100vh; }
-        header { background: linear-gradient(135deg, #0d1117, #161a25); padding: 40px 20px 20px 20px; text-align: center; border-bottom: 3px solid var(--accent-color); position: relative; }
+        /* YENİ: ARKAPLAN GÖRSELİ VE OPAKLIK FİLTRESİ BURADA! */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; min-height: 100vh; background-image: linear-gradient(rgba(22, 26, 37, 0.90), rgba(22, 26, 37, 0.96)), url('image6.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+        
+        header { background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(22, 26, 37, 0.8)); padding: 40px 20px 20px 20px; text-align: center; border-bottom: 3px solid var(--accent-color); position: relative; backdrop-filter: blur(5px); }
         header h1 { margin: 0; color: var(--accent-color); font-size: 3.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
         header p { color: var(--text-color); font-size: 1.1rem; letter-spacing: 2px; margin-top: 5px; opacity: 0.8; text-transform: uppercase; }
         .header-bayrak { width: 75px; border-radius: 4px; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
@@ -18,12 +20,12 @@
         nav button:hover, nav button.active { color: var(--accent-color); border-bottom: 3px solid var(--accent-color); background-color: rgba(255,255,255,0.03); }
         .btn-giris { background-color: var(--accent-color) !important; color: #000 !important; margin-left: 20px; border-radius: 5px; padding: 10px 20px !important; font-weight: 900 !important; }
 
-        .countdown-banner { background-color: #0a0d14; text-align: center; padding: 12px 20px; font-size: 1.25rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; border-bottom: 2px solid; transition: color 1s ease, text-shadow 1s ease, border-bottom-color 1s ease; display: flex; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); }
+        .countdown-banner { background-color: rgba(10, 13, 20, 0.85); backdrop-filter: blur(3px); text-align: center; padding: 12px 20px; font-size: 1.25rem; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; border-bottom: 2px solid; transition: color 1s ease, text-shadow 1s ease, border-bottom-color 1s ease; display: flex; align-items: center; justify-content: center; gap: 15px; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5); }
         .hourglass-spin { display: inline-block; animation: kumSaati 4s ease-in-out infinite; }
         @keyframes kumSaati { 0% { transform: rotate(0deg); } 45% { transform: rotate(180deg); } 50% { transform: rotate(180deg); } 95% { transform: rotate(360deg); } 100% { transform: rotate(360deg); } }
         .pulse-anim { animation: kalpAtisi 1s infinite; }
         
-        .news-ticker-container { background-color: #0d1117; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
+        .news-ticker-container { background-color: rgba(13, 17, 23, 0.85); backdrop-filter: blur(3px); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
         .news-ticker-title { background-color: var(--accent-color); color: #000; padding: 8px 20px; font-weight: 900; font-size: 0.85rem; text-transform: uppercase; z-index: 10; box-shadow: 5px 0 15px rgba(0,0,0,0.8); letter-spacing: 1px; }
         .news-content { display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; color: var(--text-color); font-weight: 600; font-size: 0.95rem; letter-spacing: 1px; }
         @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
@@ -42,10 +44,10 @@
 
         h2 { color: var(--accent-color); border-left: 4px solid var(--accent-color); padding-left: 15px; margin-bottom: 25px; font-weight: 600; letter-spacing: 1px; }
         
-        table { width: 100%; border-collapse: collapse; background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        table { width: 100%; border-collapse: collapse; background-color: rgba(31, 37, 51, 0.9); backdrop-filter: blur(5px); border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
         th, td { padding: 16px; text-align: center; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
-        th { background-color: #11151e; color: var(--accent-color); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
-        tr:hover { background-color: rgba(212, 175, 55, 0.05); }
+        th { background-color: rgba(17, 21, 30, 0.95); color: var(--accent-color); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        tr:hover { background-color: rgba(212, 175, 55, 0.08); }
         tr:nth-child(1) td:first-child { border-left: 4px solid #3498db; }
         tr:nth-child(n+2):nth-child(-n+5) td:first-child { border-left: 4px solid #7f8c8d; }
         
@@ -53,10 +55,10 @@
         .takim-logo { width: 35px; height: 35px; object-fit: contain; margin-right: 15px; border-radius: 50%; }
         .puan-kutusu { font-weight: 800; color: var(--accent-color); font-size: 1.2rem; background-color: rgba(212, 175, 55, 0.1); }
 
-        .mac-kart { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.2s; cursor: pointer; }
-        .mac-kart:hover { transform: scale(1.01); border-color: var(--accent-color); }
+        .mac-kart { background-color: rgba(31, 37, 51, 0.9); backdrop-filter: blur(5px); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
+        .mac-kart:hover { transform: scale(1.01); border-color: var(--accent-color); box-shadow: 0 5px 15px rgba(212, 175, 55, 0.15); }
         .takim-ad { flex: 1; display: flex; align-items: center; } .takim-sol { justify-content: flex-end; padding-right: 20px; } .takim-sag { justify-content: flex-start; padding-left: 20px; }
-        .skor-alan { background-color: #11151e; padding: 10px 15px; border-radius: 6px; font-weight: 800; font-size: 1.3rem; color: var(--accent-color); min-width: 80px; text-align: center; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; }
+        .skor-alan { background-color: rgba(17, 21, 30, 0.9); padding: 10px 15px; border-radius: 6px; font-weight: 800; font-size: 1.3rem; color: var(--accent-color); min-width: 80px; text-align: center; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; }
         .hafta-baslik { color: var(--text-color); padding: 10px; margin-top: 30px; margin-bottom: 10px; font-weight: bold; text-align: center; border-bottom: 1px solid var(--border-color); letter-spacing: 2px; }
 
         .sponsor-banner { margin-top: 40px; width: 100%; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.5); border: 1px solid var(--border-color); }
@@ -65,7 +67,7 @@
         .bracket-wrapper { display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: 30px; overflow-x: auto; padding: 20px 0 40px 0; }
         .bracket-column { display: flex; flex-direction: column; gap: 25px; position: relative; justify-content: center; min-height: 320px; }
         .bracket-header { text-align: center; color: var(--text-color); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 5px; }
-        .bracket-match { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; width: 250px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); overflow: hidden; position: relative; transition: all 0.3s ease; }
+        .bracket-match { background-color: rgba(31, 37, 51, 0.9); backdrop-filter: blur(5px); border: 1px solid var(--border-color); border-radius: 8px; width: 250px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); overflow: hidden; position: relative; transition: all 0.3s ease; }
         .bracket-match.final { border: 2px solid var(--accent-color); box-shadow: 0 0 25px rgba(212, 175, 55, 0.15); transform: scale(1.05); }
         .bracket-team { padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; color: var(--text-bright); }
         .bracket-score { background-color: #11151e; padding: 4px 10px; border-radius: 4px; color: var(--accent-color); font-weight: bold; border: 1px solid var(--border-color); }
@@ -74,7 +76,7 @@
 
         .video-konteyner { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 0 50px rgba(212, 175, 55, 0.15), 0 20px 40px rgba(0,0,0,0.8); border: 2px solid var(--accent-color); background-color: #000; }
         .video-konteyner iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .kural-listesi { background-color: var(--card-bg); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px; line-height: 1.8; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .kural-listesi { background-color: rgba(31, 37, 51, 0.9); backdrop-filter: blur(5px); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px; line-height: 1.8; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
 
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
         .modal-box { background: #161a25; width: 90%; max-width: 550px; border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; box-shadow: 0 10px 50px rgba(0,0,0,0.9); animation: modalFadeIn 0.3s ease; }
@@ -135,11 +137,14 @@
     </div>
 
     <header>
+        <!-- YENİ: LOGO IMAGE8 OLARAK GÜNCELLENDİ -->
         <div style="position: absolute; left: 30px; top: 20px;">
-            <img src="image7.jpg" alt="Turnuva Logosu" style="width: 80px; height: 80px; object-fit: contain;">
+            <img src="image8.png" alt="GOAT Logosu" style="width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));">
         </div>
+        
         <h1>GOAT LEAGUE</h1>
         <p>JFK Sezonu | 1. Sezon</p>
+        
         <div style="position: absolute; right: 30px; top: 20px; text-align: center;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="TR Bayrak" class="header-bayrak">
             <div style="color: var(--accent-color); font-size: 0.75rem; margin-top: 6px; font-weight: 800; letter-spacing: 1px;">BETA 0.2</div>
@@ -300,7 +305,7 @@
         let sonVeriOzeti = ""; 
         let skorHafizasi = {}; 
         window.tumFikstur = []; 
-        window.tumForumYorumlari = []; // YENİ: Sheets'ten gelen yorum havuzu
+        window.tumForumYorumlari = [];
 
         function baslangicSayaci() {
             const targetDate = new Date("June 5, 2026 22:45:00").getTime();
@@ -377,51 +382,28 @@
             document.getElementById('tab-' + tabType).classList.add('active'); document.getElementById(tabType + '-icerik').classList.add('active');
         }
 
-        // YENİ: YORUMU SHEETS'E GÖNDEREN FONKSİYON
         async function yorumGonder() {
             let textKutusu = document.getElementById("yeni-yorum-text"); 
             let text = textKutusu.value.trim(); 
             if (text === "") return;
             
-            let btn = event.target;
-            btn.innerText = "Gönderiliyor...";
-            btn.disabled = true;
-
+            let btn = event.target; btn.innerText = "Gönderiliyor..."; btn.disabled = true;
             let aktifKullanici = localStorage.getItem("goat_kullanici"); 
             let yeniYorum = { macKodu: aktifMacKey, yazar: aktifKullanici, metin: text, zaman: new Date().getTime() };
 
             try {
-                // Sheets API'ye POST İsteği atıyoruz
-                await fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(yeniYorum)
-                });
-                
-                // Gönderim başarılı olunca listeyi anında güncelle
-                window.tumForumYorumlari.push(yeniYorum);
-                textKutusu.value = ""; 
-                yorumlariEkranaBas(); 
-            } catch (err) {
-                alert("Yorum gönderilemedi, bağlantını kontrol et!");
-            }
+                await fetch(API_URL, { method: 'POST', body: JSON.stringify(yeniYorum) });
+                window.tumForumYorumlari.push(yeniYorum); textKutusu.value = ""; yorumlariEkranaBas(); 
+            } catch (err) { alert("Yorum gönderilemedi, bağlantını kontrol et!"); }
             
-            btn.innerText = "Gönder";
-            btn.disabled = false;
+            btn.innerText = "Gönder"; btn.disabled = false;
         }
 
-        // YENİ: YORUMLARI SHEETS HAVUZUNDAN ÇEKEN FONKSİYON
         function yorumlariEkranaBas() {
             let liste = document.getElementById("yorumlar-listesi"); 
-            
-            // Sadece bu maça ait yorumları filtrele
             let buMacinYorumlari = window.tumForumYorumlari.filter(y => y.macKodu === aktifMacKey);
-            
             liste.innerHTML = `<div class="yorum-kutusu" style="border-color: var(--accent-color);"><div class="yorum-baslik"><span class="yazar-ad">Sistem Admini</span> <span class="yorum-zaman">Sabit Mesaj</span></div><div class="yorum-text">İyi oynayan kazansın, maç sonu analizleri buraya! ⚔️</div></div>`;
-            
-            buMacinYorumlari.forEach(y => { 
-                liste.innerHTML += `<div class="yorum-kutusu"><div class="yorum-baslik"><span class="yazar-ad">${y.yazar}</span> <span class="yorum-zaman">${zamanHesapla(y.zaman)}</span></div><div class="yorum-text">${y.metin}</div></div>`; 
-            });
-            
+            buMacinYorumlari.forEach(y => { liste.innerHTML += `<div class="yorum-kutusu"><div class="yorum-baslik"><span class="yazar-ad">${y.yazar}</span> <span class="yorum-zaman">${zamanHesapla(y.zaman)}</span></div><div class="yorum-text">${y.metin}</div></div>`; });
             liste.scrollTop = liste.scrollHeight;
         }
 
@@ -468,10 +450,7 @@
         async function verileriGetir(otomatikMi = false) {
             try {
                 const response = await fetch(API_URL); const data = await response.json();
-                window.tumFikstur = data.fikstur; 
-                
-                // YENİ: Sheets'ten gelen forum yorumlarını kaydet
-                window.tumForumYorumlari = data.forum || []; 
+                window.tumFikstur = data.fikstur; window.tumForumYorumlari = data.forum || []; 
                 
                 let yeniVeriOzeti = JSON.stringify(data);
                 if (otomatikMi) {
@@ -484,10 +463,7 @@
                         }
                         skorHafizasi[macId] = { e: isNaN(yeniEv) ? 0 : yeniEv, d: isNaN(yeniDep) ? 0 : yeniDep };
                     });
-                    
-                    // Radar çalışırken modal açıksa, yorumları sessizce güncelle (Başka biri yorum atarsa anında düşer)
                     if(document.getElementById('macModal').style.display === 'flex') { yorumlariEkranaBas(); }
-                    
                 } else {
                     data.fikstur.forEach(mac => { let macId = mac.evSahibi + "-" + mac.deplasman; let eS = parseInt(mac.evSkor); let dS = parseInt(mac.depSkor); skorHafizasi[macId] = { e: isNaN(eS) ? 0 : eS, d: isNaN(dS) ? 0 : dS }; });
                 }
