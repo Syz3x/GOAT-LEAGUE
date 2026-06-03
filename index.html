@@ -67,17 +67,15 @@
         table { width: 100%; border-collapse: collapse; background-color: rgba(31, 37, 51, 0.9); backdrop-filter: blur(5px); border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.4); transform: translateZ(0); }
         th, td { padding: 16px; text-align: center; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
         
-        /* DÜZELTME: SİMETRİK VE DİKEY AYRAÇSIZ TABLO */
+        /* OTOBAN BOŞLUĞU SİLİNDİ, ÇİZGİLER JİLET GİBİ DÜMDÜZ OLDU! */
         th:first-child, td:first-child { 
-            border-left: 4px solid transparent; /* Kırılmayı önleyen gizli hizalayıcı duruyor */
-            white-space: nowrap; /* Takım isimlerinin alt satıra düşmesini engeller */
-            width: 35%;
+            border-left: 4px solid transparent; 
+            white-space: nowrap; 
         }
         
         th { background-color: rgba(17, 21, 30, 0.95); color: var(--accent-color); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
         tr:hover { background-color: rgba(212, 175, 55, 0.08); }
         
-        /* Efes Cup Renk Şeritleri */
         tr:nth-child(1) td:first-child { border-left-color: #3498db; }
         tr:nth-child(n+2):nth-child(-n+5) td:first-child { border-left-color: #7f8c8d; }
         
