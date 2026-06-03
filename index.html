@@ -7,13 +7,27 @@
     <style>
         :root { --bg-color: #161a25; --card-bg: #1f2533; --accent-color: #d4af37; --text-color: #e8e3d3; --text-bright: #ffffff; --border-color: #2c3545; }
         
-        /* YENİ: ARKAPLAN GÖRSELİ VE OPAKLIK FİLTRESİ BURADA! */
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; min-height: 100vh; background-image: linear-gradient(rgba(22, 26, 37, 0.90), rgba(22, 26, 37, 0.96)), url('image6.png'); background-size: cover; background-position: center; background-attachment: fixed; }
         
-        header { background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(22, 26, 37, 0.8)); padding: 40px 20px 20px 20px; text-align: center; border-bottom: 3px solid var(--accent-color); position: relative; backdrop-filter: blur(5px); }
+        header { background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(22, 26, 37, 0.8)); padding: 35px 20px 25px 20px; text-align: center; border-bottom: 3px solid var(--accent-color); position: relative; backdrop-filter: blur(5px); min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
+        /* YENİ: YILAN (SNAKE) NEON EFEKTİ */
+        .snake-box { position: relative; display: inline-block; padding: 5px 25px; overflow: hidden; margin-bottom: 5px; }
+        .snake-box span { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .snake-box::before, .snake-box::after, .snake-box span::before, .snake-box span::after { content: ''; position: absolute; background: #fff; box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--accent-color); }
+        .snake-box::before { top: 0; left: -100%; width: 100%; height: 3px; animation: snake-top 2s linear infinite; }
+        .snake-box::after { top: -100%; right: 0; width: 3px; height: 100%; animation: snake-right 2s linear infinite 0.5s; }
+        .snake-box span::before { bottom: 0; right: -100%; width: 100%; height: 3px; animation: snake-bottom 2s linear infinite 1s; }
+        .snake-box span::after { bottom: -100%; left: 0; width: 3px; height: 100%; animation: snake-left 2s linear infinite 1.5s; }
+        @keyframes snake-top { 0% { left: -100%; } 100% { left: 100%; } }
+        @keyframes snake-right { 0% { top: -100%; } 100% { top: 100%; } }
+        @keyframes snake-bottom { 0% { right: -100%; } 100% { right: 100%; } }
+        @keyframes snake-left { 0% { bottom: -100%; } 100% { bottom: 100%; } }
+
         header h1 { margin: 0; color: var(--accent-color); font-size: 3.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
-        header p { color: var(--text-color); font-size: 1.1rem; letter-spacing: 2px; margin-top: 5px; opacity: 0.8; text-transform: uppercase; }
-        .header-bayrak { width: 75px; border-radius: 4px; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
+        header p { color: var(--text-color); font-size: 1.1rem; letter-spacing: 2px; margin: 0; opacity: 0.8; text-transform: uppercase; }
+        
+        .header-bayrak { width: 110px; border-radius: 4px; box-shadow: 0 6px 15px rgba(0,0,0,0.6); }
 
         nav { display: none; justify-content: center; background-color: var(--card-bg); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.5); flex-wrap: wrap; align-items: center; }
         nav button { background: none; border: none; color: var(--text-color); padding: 16px 25px; font-size: 0.95rem; cursor: pointer; font-weight: 700; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
@@ -60,9 +74,6 @@
         .takim-ad { flex: 1; display: flex; align-items: center; } .takim-sol { justify-content: flex-end; padding-right: 20px; } .takim-sag { justify-content: flex-start; padding-left: 20px; }
         .skor-alan { background-color: rgba(17, 21, 30, 0.9); padding: 10px 15px; border-radius: 6px; font-weight: 800; font-size: 1.3rem; color: var(--accent-color); min-width: 80px; text-align: center; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; }
         .hafta-baslik { color: var(--text-color); padding: 10px; margin-top: 30px; margin-bottom: 10px; font-weight: bold; text-align: center; border-bottom: 1px solid var(--border-color); letter-spacing: 2px; }
-
-        .sponsor-banner { margin-top: 40px; width: 100%; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.5); border: 1px solid var(--border-color); }
-        .sponsor-banner img { width: 100%; display: block; }
 
         .bracket-wrapper { display: flex; align-items: center; justify-content: center; gap: 40px; margin-top: 30px; overflow-x: auto; padding: 20px 0 40px 0; }
         .bracket-column { display: flex; flex-direction: column; gap: 25px; position: relative; justify-content: center; min-height: 320px; }
@@ -137,17 +148,19 @@
     </div>
 
     <header>
-        <!-- YENİ: LOGO IMAGE8 OLARAK GÜNCELLENDİ -->
-        <div style="position: absolute; left: 30px; top: 20px;">
-            <img src="image8.png" alt="GOAT Logosu" style="width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));">
+        <div style="position: absolute; left: 40px; top: 15px;">
+            <img src="image8.png" alt="GOAT Logosu" style="width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0 0 15px rgba(255,255,255,0.15));">
         </div>
         
-        <h1>GOAT LEAGUE</h1>
+        <div class="snake-box">
+            <span></span>
+            <h1>GOAT LEAGUE</h1>
+        </div>
         <p>JFK Sezonu | 1. Sezon</p>
         
-        <div style="position: absolute; right: 30px; top: 20px; text-align: center;">
+        <div style="position: absolute; right: 40px; top: 15px; text-align: center;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="TR Bayrak" class="header-bayrak">
-            <div style="color: var(--accent-color); font-size: 0.75rem; margin-top: 6px; font-weight: 800; letter-spacing: 1px;">BETA 0.2</div>
+            <div style="color: var(--accent-color); font-size: 0.9rem; margin-top: 8px; font-weight: 900; letter-spacing: 1.5px;">BETA 0.3</div>
         </div>
     </header>
 
@@ -155,7 +168,7 @@
         <button class="active" onclick="switchTab('puan-durumu')">Puan Durumu</button>
         <button onclick="switchTab('fikstur')">Fikstür</button>
         <button onclick="switchTab('efes-cup')">EFES CUP</button>
-        <button onclick="switchTab('ozetler')">Günün Anları</button>
+        <button onclick="switchTab('ozetler')">Özetler</button>
         <button onclick="switchTab('kurallar')">Kurallar</button>
         <button id="nav-login-btn" class="btn-giris" onclick="cikisYapConfirm()">👤 KULLANICI</button>
     </nav>
@@ -246,7 +259,6 @@
                 <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 14px; height: 14px; background-color: #3498db; border-radius: 4px;"></div><span>EFES CUP Final</span></div>
                 <div style="display: flex; align-items: center; gap: 8px;"><div style="width: 14px; height: 14px; background-color: #7f8c8d; border-radius: 4px;"></div><span>EFES CUP Play-Off</span></div>
             </div>
-            <div class="sponsor-banner"><img id="reklam1" src="" alt="Sponsor"></div>
         </div>
         
         <div id="fikstur" class="tab-content">
@@ -254,7 +266,6 @@
             <div style="text-align:center; color:#888; font-size:0.9rem; margin-bottom: 20px;">💡 İstatistikleri ve forumu görmek için maçın üzerine tıklayın.</div>
             <div id="fikstur-loading" class="loading">Fikstür çekiliyor...</div>
             <div id="fikstur-alan"></div>
-            <div class="sponsor-banner"><img id="reklam2" src="" alt="Sponsor"></div>
         </div>
 
         <div id="efes-cup" class="tab-content">
@@ -274,13 +285,11 @@
                     <div class="bracket-match final"><div class="bracket-team" id="bracket-fin-ev" style="color: var(--accent-color);"><span class="takim-ad-wrapper">Lig 1.si (Direkt Finalist)</span> <span class="bracket-score" id="score-fin-ev">-</span></div><div class="bracket-team" id="bracket-fin-dep"><span class="takim-ad-wrapper tbd">Yarı Final Galibi</span> <span class="bracket-score" id="score-fin-dep">-</span></div><div class="bracket-durum" id="status-fin">Bekleniyor</div></div>
                 </div>
             </div>
-            <div class="sponsor-banner"><img id="reklam3" src="" alt="Sponsor"></div>
         </div>
 
         <div id="ozetler" class="tab-content">
             <h2>Jenerik & Özetler</h2>
             <div class="video-konteyner"><iframe src="https://www.youtube.com/embed/9U8HEcSeAZY?autoplay=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            <div class="sponsor-banner"><img id="reklam4" src="" alt="Sponsor"></div>
         </div>
 
         <div id="kurallar" class="tab-content">
@@ -291,7 +300,6 @@
                 <h3 style="color: var(--accent-color); border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">⚖️ Genel Kurallar</h3>
                 <ul style="list-style-type: square; line-height: 2; color: var(--text-color);"><li>Maçı oynayan iki takımdan en az biri maç boyunca <strong style="color:white;">maçın video kaydını almak zorundadır.</strong></li><li>Gol sevinçleri izlenecektir. 😎</li><li>Maç sırasında <strong style="color:#e74c3c;">Trash Talk yasaktır.</strong> 🛑</li><li>Gol atan takımın <strong style="color:white;">gol müziğini</strong> moderatörlerin açması zorunludur. 🎵</li></ul>
             </div>
-            <div class="sponsor-banner"><img id="reklam5" src="" alt="Sponsor"></div>
         </div>
     </div>
 
@@ -299,7 +307,6 @@
         const API_URL = "https://script.google.com/macros/s/AKfycbxYH8oZCVFCSQyO6nYBon2BUPIO91U1xKLLT4aVPMr_DgTJDwY6TMHaSaeWW4qQGf4/exec";
         const DAVET_KODU = "goat2026"; 
         const TAKIM_LOGOLARI = { "Bozkurt FC": "image.png", "Gunes FC": "image2.png", "Vaxess FC": "image3.png", "Vega SK": "image4.png", "Huginn SK": "image5.png" };
-        const REKLAM_LINKI = "image6.png";
         
         let aktifMacKey = ""; 
         let sonVeriOzeti = ""; 
@@ -514,7 +521,6 @@
         }
 
         window.onload = function() { 
-            if(document.getElementById('reklam1')) document.getElementById('reklam1').src = REKLAM_LINKI; if(document.getElementById('reklam2')) document.getElementById('reklam2').src = REKLAM_LINKI; if(document.getElementById('reklam3')) document.getElementById('reklam3').src = REKLAM_LINKI; if(document.getElementById('reklam4')) document.getElementById('reklam4').src = REKLAM_LINKI; if(document.getElementById('reklam5')) document.getElementById('reklam5').src = REKLAM_LINKI;
             baslangicSayaci(); oturumKontrol(); 
             setInterval(() => { if (localStorage.getItem("goat_kullanici")) { verileriGetir(true); } }, 10000); 
         };
