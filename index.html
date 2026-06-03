@@ -12,9 +12,19 @@
         ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #fff; }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; min-height: 100vh; background-image: linear-gradient(rgba(22, 26, 37, 0.90), rgba(22, 26, 37, 0.96)), url('image6.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+        /* MADDE 1: KIYVILCIM KONTEYNERI */
+        .particle-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .particle { position: absolute; bottom: -10px; background: rgba(212, 175, 55, 0.3); box-shadow: 0 0 8px var(--accent-color); border-radius: 50%; animation: floatUp 7s linear infinite; }
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-105vh) scale(0.4); opacity: 0; }
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-color); color: var(--text-color); margin: 0; padding: 0; min-height: 100vh; background-image: linear-gradient(rgba(22, 26, 37, 0.92), rgba(22, 26, 37, 0.97)), url('image6.png'); background-size: cover; background-position: center; background-attachment: fixed; }
         
-        header { background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(22, 26, 37, 0.8)); padding: 35px 20px 25px 20px; text-align: center; border-bottom: 3px solid var(--accent-color); position: relative; backdrop-filter: blur(5px); min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        header { background: linear-gradient(135deg, rgba(13, 17, 23, 0.8), rgba(22, 26, 37, 0.8)); padding: 35px 20px 25px 20px; text-align: center; border-bottom: 3px solid var(--accent-color); position: relative; backdrop-filter: blur(5px); min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
         
         header h1 { 
             margin: 0; font-size: 3.8rem; font-weight: 900; text-transform: uppercase; letter-spacing: 4px; 
@@ -49,7 +59,7 @@
         .canli-badge { color: #e74c3c; font-size: 0.85rem; font-weight: 900; letter-spacing: 1.5px; animation: macBlink 1.2s infinite; text-transform: uppercase; margin-bottom: 4px; }
         @keyframes macBlink { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.95); } 100% { opacity: 1; transform: scale(1); } }
 
-        .container { display: none; max-width: 1050px; margin: 30px auto; padding: 0 20px; }
+        .container { display: none; max-width: 1050px; margin: 30px auto; padding: 0 20px; position: relative; z-index: 2; }
         .tab-content { display: none; animation: fadeIn 0.4s ease; } .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -62,6 +72,13 @@
         tr:nth-child(1) td:first-child { border-left: 4px solid #3498db; }
         tr:nth-child(n+2):nth-child(-n+5) td:first-child { border-left: 4px solid #7f8c8d; }
         
+        /* MADDE 3: LİDER TAKIM ŞAMPİYONLUK HALESİ (TACSIZ) */
+        .lider-row { background-color: rgba(212, 175, 55, 0.06) !important; position: relative; animation: leaderGlow 2s ease-in-out infinite alternate; }
+        @keyframes leaderGlow {
+            0% { box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.15), 0 0 10px rgba(212, 175, 55, 0.1); }
+            100% { box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.4), 0 0 25px rgba(212, 175, 55, 0.3); }
+        }
+
         .takim-hucre { display: flex; align-items: center; text-align: left; font-weight: 700; color: var(--text-bright); font-size: 1.1rem; }
         .takim-logo { width: 35px; height: 35px; object-fit: contain; margin-right: 15px; border-radius: 50%; }
         .puan-kutusu { font-weight: 800; color: var(--accent-color); font-size: 1.2rem; background-color: rgba(212, 175, 55, 0.1); }
@@ -108,6 +125,17 @@
         .bracket-team img { width: 22px; height: 22px; object-fit: contain; margin-right: 8px; border-radius: 50%; vertical-align: middle; }
         .bracket-durum { text-align: center; background-color: #0d1117; font-size: 0.75rem; padding: 6px; color: #f39c12; font-weight: 800; border-top: 1px solid var(--border-color); text-transform: uppercase; letter-spacing: 1px; }
 
+        /* MADDE 5: CANLI KUPA KÜRSÜSÜ CSS */
+        .trophy-column { align-items: center; justify-content: center; }
+        .trophy-pedestal { position: relative; width: 180px; height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; margin-top: 15px; }
+        .trophy-cup { font-size: 4.5rem; filter: drop-shadow(0 0 15px var(--accent-color)); animation: trophyFloat 3s ease-in-out infinite alternate; margin-bottom: 10px; position: relative; z-index: 3; cursor: pointer; }
+        .pedestal-base { width: 140px; height: 60px; background: linear-gradient(135deg, #1f2533, #0d1117); border: 2px solid var(--accent-color); border-radius: 8px; box-shadow: 0 0 25px rgba(212, 175, 55, 0.3); display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 5px; position: relative; z-index: 2; transition: all 0.5s ease; }
+        .champion-title { font-size: 0.65rem; font-weight: 900; color: var(--accent-color); letter-spacing: 2px; margin-bottom: 2px; text-transform: uppercase; }
+        .champion-name { font-size: 0.85rem; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; text-align: center; max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        @keyframes trophyFloat { 0% { transform: translateY(0); filter: drop-shadow(0 0 15px rgba(212,175,55,0.4)); } 100% { transform: translateY(-12px); filter: drop-shadow(0 0 30px rgba(212,175,55,0.8)); } }
+        .pedestal-active { border-color: #27ae60; box-shadow: 0 0 35px rgba(39, 174, 96, 0.6); animation: champPulse 1.5s infinite alternate; }
+        @keyframes champPulse { 0% { transform: scale(1); } 100% { transform: scale(1.03); } }
+
         .video-konteyner { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; box-shadow: 0 0 50px rgba(212, 175, 55, 0.15), 0 20px 40px rgba(0,0,0,0.8); border: 2px solid var(--accent-color); background-color: #000; transform: translateZ(0); }
         .video-konteyner iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
         .kural-listesi { background-color: rgba(31, 37, 51, 0.9); backdrop-filter: blur(5px); border: 1px solid var(--border-color); padding: 30px; border-radius: 10px; line-height: 1.8; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transform: translateZ(0); }
@@ -129,7 +157,6 @@
         
         .modal-body { max-height: 60vh; overflow-y: auto; display: flex; flex-direction: column; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; transform: translateZ(0); }
         
-        /* YENİ: İSTATİSTİK BARLARI CSS */
         .istatistik-area, .forum-area { display: none; } 
         .istatistik-area.active { display: block; }
         .forum-area.active { display: flex; flex-direction: column; height: 100%; } 
@@ -172,6 +199,8 @@
 </head>
 <body>
 
+    <div id="particles" class="particle-container"></div>
+
     <audio id="gol-sesi" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
 
     <div id="toast-kutu">
@@ -192,7 +221,7 @@
         
         <div style="position: absolute; right: 40px; top: 15px; text-align: center;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="TR Bayrak" class="header-bayrak">
-            <div style="color: var(--accent-color); font-size: 0.9rem; margin-top: 8px; font-weight: 900; letter-spacing: 1.5px;">BETA 0.3.3</div>
+            <div style="color: var(--accent-color); font-size: 0.9rem; margin-top: 8px; font-weight: 900; letter-spacing: 1.5px;">BETA 0.3</div>
         </div>
     </header>
 
@@ -252,7 +281,6 @@
             </div>
 
             <div class="modal-body">
-                <!-- YENİ: İLERLEME ÇUBUKLU İSTATİSTİK ALANI -->
                 <div id="istatistik-icerik" class="istatistik-area active">
                     <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-top-e">0</div><div class="stat-label">Topa S. Olma %'si</div><div class="stat-val" id="st-top-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-top-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-top-d" style="width:0%"></div></div></div></div>
                     <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-geri-e">0</div><div class="stat-label">Topu Geri Kazanma (Sn)</div><div class="stat-val" id="st-geri-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-geri-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-geri-d" style="width:0%"></div></div></div></div>
@@ -317,6 +345,17 @@
                     <div class="bracket-header" style="color: #3498db;">🏆 BÜYÜK FİNAL</div>
                     <div class="bracket-match final"><div class="bracket-team" id="bracket-fin-ev" style="color: var(--accent-color);"><span class="takim-ad-wrapper">Lig 1.si (Direkt Finalist)</span> <span class="bracket-score" id="score-fin-ev">-</span></div><div class="bracket-team" id="bracket-fin-dep"><span class="takim-ad-wrapper tbd">Yarı Final Galibi</span> <span class="bracket-score" id="score-fin-dep">-</span></div><div class="bracket-durum" id="status-fin">Bekleniyor</div></div>
                 </div>
+                
+                <div class="bracket-column trophy-column">
+                    <div class="bracket-header" style="color:var(--accent-color); font-weight: 900;">ŞAMPİYON</div>
+                    <div class="trophy-pedestal">
+                        <div class="trophy-cup">🏆</div>
+                        <div class="pedestal-base" id="pedestal-container">
+                            <span class="champion-title">GOAT LEAGUE</span>
+                            <span class="champion-name" id="cup-champion-name">BEKLENİYOR</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -340,24 +379,27 @@
         const API_URL = "https://script.google.com/macros/s/AKfycbxYH8oZCVFCSQyO6nYBon2BUPIO91U1xKLLT4aVPMr_DgTJDwY6TMHaSaeWW4qQGf4/exec";
         const DAVET_KODU = "goat2026"; 
         const TAKIM_LOGOLARI = { "Bozkurt FC": "image.png", "Gunes FC": "image2.png", "Vaxess FC": "image3.png", "Vega SK": "image4.png", "Huginn SK": "image5.png" };
+        const TAKIM_RENKLERI = { "Bozkurt FC": "#e74c3c", "Gunes FC": "#f1c40f", "Vaxess FC": "#95a5a6", "Vega SK": "#27ae60", "Huginn SK": "#3498db" };
         
-        const TAKIM_RENKLERI = {
-            "Bozkurt FC": "#e74c3c", "Gunes FC": "#f1c40f", "Vaxess FC": "#95a5a6", "Vega SK": "#27ae60", "Huginn SK": "#3498db"
-        };
+        let aktifMacKey = ""; sonVeriOzeti = ""; skorHafizasi = {}; window.tumFikstur = []; window.tumForumYorumlari = [];
 
-        let aktifMacKey = ""; 
-        let sonVeriOzeti = ""; 
-        let skorHafizasi = {}; 
-        window.tumFikstur = []; 
-        window.tumForumYorumlari = [];
+        // MADDE 1: PARÇACIK (KIVILCIM) MOTORU ÇALIŞTIRICI
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 20;
+            for(let i=0; i<particleCount; i++) {
+                let p = document.createElement('div'); p.classList.add('particle');
+                let size = Math.random() * 4 + 2; p.style.width = size + 'px'; p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + 'vw'; p.style.animationDelay = Math.random() * 6 + 's';
+                p.style.animationDuration = Math.random() * 5 + 5 + 's'; container.appendChild(p);
+            }
+        }
 
         function baslangicSayaci() {
             const targetDate = new Date("June 5, 2026 22:45:00").getTime();
             const startDate = new Date("June 2, 2026 00:00:00").getTime();
             const totalDuration = targetDate - startDate;
-            const banner = document.getElementById("countdown-banner");
-            const textEl = document.getElementById("countdown-text");
-            const iconEl = document.getElementById("hourglass-icon");
+            const banner = document.getElementById("countdown-banner"); const textEl = document.getElementById("countdown-text"); const iconEl = document.getElementById("hourglass-icon");
 
             const timer = setInterval(() => {
                 const now = new Date().getTime(); const distance = targetDate - now;
@@ -378,8 +420,7 @@
         }
 
         function zamanHesapla(timestamp) {
-            let saniye = Math.floor((new Date().getTime() - timestamp) / 1000);
-            if (saniye < 60) return saniye + " saniye önce";
+            let saniye = Math.floor((new Date().getTime() - timestamp) / 1000); if (saniye < 60) return saniye + " saniye önce";
             let dakika = Math.floor(saniye / 60); if (dakika < 60) return dakika + " dk önce";
             let saat = Math.floor(dakika / 60); if (saat < 24) return saat + " saat önce";
             let gun = Math.floor(saat / 24); return gun + " gün önce";
@@ -410,14 +451,12 @@
             if (kod !== DAVET_KODU) { alert("⛔ HATALI DAVET KODU!"); return; }
             let kullanicilar = JSON.parse(localStorage.getItem("goat_kullanicilar")) || {};
             if (kullanicilar[nick]) { if (kullanicilar[nick] !== sifre) { alert("❌ Bu kullanıcı adı alınmış veya şifreniz yanlış!"); return; } } else { kullanicilar[nick] = sifre; localStorage.setItem("goat_kullanicilar", JSON.stringify(kullanicilar)); }
-            localStorage.setItem("goat_kullanici", nick);
-            document.getElementById("auth-nick").value = ""; document.getElementById("auth-sifre").value = ""; document.getElementById("auth-kod").value = "";
+            localStorage.setItem("goat_kullanici", nick); document.getElementById("auth-nick").value = ""; document.getElementById("auth-sifre").value = ""; document.getElementById("auth-kod").value = "";
             document.getElementById('gol-sesi').load(); oturumKontrol();
         }
 
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active')); document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
             document.getElementById(tabId).classList.add('active'); event.currentTarget.classList.add('active'); 
         }
 
@@ -427,58 +466,33 @@
         }
 
         async function yorumGonder() {
-            let textKutusu = document.getElementById("yeni-yorum-text"); 
-            let text = textKutusu.value.trim(); 
-            if (text === "") return;
-            
+            let textKutusu = document.getElementById("yeni-yorum-text"); let text = textKutusu.value.trim(); if (text === "") return;
             let btn = event.target; btn.innerText = "Gönderiliyor..."; btn.disabled = true;
-            let aktifKullanici = localStorage.getItem("goat_kullanici"); 
-            let yeniYorum = { macKodu: aktifMacKey, yazar: aktifKullanici, metin: text, zaman: new Date().getTime() };
-
+            let aktifKullanici = localStorage.getItem("goat_kullanici"); let yeniYorum = { macKodu: aktifMacKey, yazar: aktifKullanici, metin: text, zaman: new Date().getTime() };
             try {
-                await fetch(API_URL, { method: 'POST', body: JSON.stringify(yeniYorum) });
-                window.tumForumYorumlari.push(yeniYorum); textKutusu.value = ""; yorumlariEkranaBas(); 
+                await fetch(API_URL, { method: 'POST', body: JSON.stringify(yeniYorum) }); window.tumForumYorumlari.push(yeniYorum); textKutusu.value = ""; yorumlariEkranaBas(); 
             } catch (err) { alert("Yorum gönderilemedi, bağlantını kontrol et!"); }
-            
             btn.innerText = "Gönder"; btn.disabled = false;
         }
 
         function yorumlariEkranaBas() {
-            let liste = document.getElementById("yorumlar-listesi"); 
-            let buMacinYorumlari = window.tumForumYorumlari.filter(y => y.macKodu === aktifMacKey);
+            let liste = document.getElementById("yorumlar-listesi"); let buMacinYorumlari = window.tumForumYorumlari.filter(y => y.macKodu === aktifMacKey);
             liste.innerHTML = `<div class="yorum-kutusu" style="border-color: var(--accent-color);"><div class="yorum-baslik"><span class="yazar-ad">Sistem Admini</span> <span class="yorum-zaman">Sabit Mesaj</span></div><div class="yorum-text">İyi oynayan kazansın, maç sonu analizleri buraya! ⚔️</div></div>`;
             buMacinYorumlari.forEach(y => { liste.innerHTML += `<div class="yorum-kutusu"><div class="yorum-baslik"><span class="yazar-ad">${y.yazar}</span> <span class="yorum-zaman">${zamanHesapla(y.zaman)}</span></div><div class="yorum-text">${y.metin}</div></div>`; });
             liste.scrollTop = liste.scrollHeight;
         }
 
-        // YENİ: OTOMATİK BAR HESAPLAMA FONKSİYONU
         function statGuncelle(id, valE, valD) {
-            document.getElementById('st-' + id + '-e').innerText = valE;
-            document.getElementById('st-' + id + '-d').innerText = valD;
-            
-            // Veriyi matematiğe dök (Virgülü noktaya çevir)
-            let e = parseFloat(String(valE).replace(',', '.')); 
-            let d = parseFloat(String(valD).replace(',', '.'));
+            document.getElementById('st-' + id + '-e').innerText = valE; document.getElementById('st-' + id + '-d').innerText = valD;
+            let e = parseFloat(String(valE).replace(',', '.')); let d = parseFloat(String(valD).replace(',', '.'));
             if(isNaN(e)) e = 0; if(isNaN(d)) d = 0;
-            
-            let total = e + d; 
-            let pE = 0, pD = 0;
-            if(total > 0) { 
-                pE = (e / total) * 100; 
-                pD = (d / total) * 100; 
-            }
-            
-            // Çubukları Yüzdelik Orana Göre Doldur (0.5 saniye animasyonla)
-            setTimeout(() => {
-                document.getElementById('bar-' + id + '-e').style.width = pE + '%';
-                document.getElementById('bar-' + id + '-d').style.width = pD + '%';
-            }, 50); // Modal açıldıktan hemen sonra aksın diye küçük bir gecikme
+            let total = e + d; pE = 0; pD = 0; if(total > 0) { pE = (e / total) * 100; pD = (d / total) * 100; }
+            setTimeout(() => { document.getElementById('bar-' + id + '-e').style.width = pE + '%'; document.getElementById('bar-' + id + '-d').style.width = pD + '%'; }, 50);
         }
 
         function acModal(evSahibi, deplasman) {
             aktifMacKey = "forum_" + evSahibi.replace(/\s+/g, '') + "_" + deplasman.replace(/\s+/g, '');
             let tiklananMac = window.tumFikstur.find(m => m.evSahibi === evSahibi && m.deplasman === deplasman) || {st: {}};
-            
             document.getElementById('modal-ev').innerText = evSahibi; document.getElementById('modal-dep').innerText = deplasman;
             
             let drm = tiklananMac.durum ? String(tiklananMac.durum).trim().toLowerCase() : "";
@@ -489,37 +503,17 @@
             }
             
             let st = tiklananMac.st;
-            
-            // YENİ: 32 SATIR KODU 16 SATIRA DÜŞÜRDÜK VE BARLARI OTOMATİĞE BAĞLADIK
-            statGuncelle('top', st.evTop, st.depTop);
-            statGuncelle('geri', st.evGeri, st.depGeri);
-            statGuncelle('sut', st.evSut, st.depSut);
-            statGuncelle('xg', st.evxG, st.depxG);
-            statGuncelle('pas', st.evPas, st.depPas);
-            statGuncelle('mud', st.evMud, st.depMud);
-            statGuncelle('tk', st.evTk, st.depTk);
-            statGuncelle('kes', st.evKes, st.depKes);
-            statGuncelle('kur', st.evKur, st.depKur);
-            statGuncelle('faul', st.evFaul, st.depFaul);
-            statGuncelle('ofs', st.evOfs, st.depOfs);
-            statGuncelle('kor', st.evKor, st.depKor);
-            statGuncelle('ser', st.evSer, st.depSer);
-            statGuncelle('pen', st.evPen, st.depPen);
-            statGuncelle('sari', st.evSari, st.depSari);
-            statGuncelle('kirmizi', st.evKir, st.depKir);
+            statGuncelle('top', st.evTop, st.depTop); statGuncelle('geri', st.evGeri, st.depGeri); statGuncelle('sut', st.evSut, st.depSut); statGuncelle('xg', st.evxG, st.depxG);
+            statGuncelle('pas', st.evPas, st.depPas); statGuncelle('mud', st.evMud, st.depMud); statGuncelle('tk', st.evTk, st.depTk); statGuncelle('kes', st.evKes, st.depKes);
+            statGuncelle('kur', st.evKur, st.depKur); statGuncelle('faul', st.evFaul, st.depFaul); statGuncelle('ofs', st.evOfs, st.depOfs); statGuncelle('kor', st.evKor, st.depKor);
+            statGuncelle('ser', st.evSer, st.depSer); statGuncelle('pen', st.evPen, st.depPen); statGuncelle('sari', st.evSari, st.depSari); statGuncelle('kirmizi', st.evKir, st.depKir);
 
-            let yorumAlani = document.getElementById("dinamik-yorum-alani");
-            yorumlariEkranaBas(); 
+            let yorumAlani = document.getElementById("dinamik-yorum-alani"); yorumlariEkranaBas(); 
             yorumAlani.innerHTML = `<div class="yorum-yap"><textarea id="yeni-yorum-text" rows="3" placeholder="Maç hakkında ne düşünüyorsun?"></textarea><button onclick="yorumGonder()">Gönder</button></div>`;
-            
             switchModalTab('istatistik'); document.getElementById('macModal').style.display = 'flex';
         }
 
-        function kapatModal() { 
-            document.getElementById('macModal').style.display = 'none'; 
-            // Kapanırken çubukları sıfırla ki bir dahaki açılışta baştan dolsunlar
-            document.querySelectorAll('.bar-fill').forEach(bar => bar.style.width = '0%');
-        }
+        function kapatModal() { document.getElementById('macModal').style.display = 'none'; document.querySelectorAll('.bar-fill').forEach(bar => bar.style.width = '0%'); }
 
         async function verileriGetir(otomatikMi = false) {
             try {
@@ -529,8 +523,7 @@
                 let yeniVeriOzeti = JSON.stringify(data);
                 if (otomatikMi) {
                     data.fikstur.forEach(mac => {
-                        let macId = mac.evSahibi + "-" + mac.deplasman;
-                        let yeniEv = parseInt(mac.evSkor); let yeniDep = parseInt(mac.depSkor); let eskiSkor = skorHafizasi[macId];
+                        let macId = mac.evSahibi + "-" + mac.deplasman; let yeniEv = parseInt(mac.evSkor); let yeniDep = parseInt(mac.depSkor); let eskiSkor = skorHafizasi[macId];
                         if (eskiSkor && !isNaN(yeniEv) && !isNaN(yeniDep)) {
                             if (yeniEv > eskiSkor.e) { golBildirimiGoster(`GOL! ${mac.evSahibi} attı!\n${mac.evSahibi} ${yeniEv} - ${yeniDep} ${mac.deplasman}`); } 
                             else if (yeniDep > eskiSkor.d) { golBildirimiGoster(`GOL! ${mac.deplasman} attı!\n${mac.evSahibi} ${yeniEv} - ${yeniDep} ${mac.deplasman}`); }
@@ -542,12 +535,18 @@
                     data.fikstur.forEach(mac => { let macId = mac.evSahibi + "-" + mac.deplasman; let eS = parseInt(mac.evSkor); let dS = parseInt(mac.depSkor); skorHafizasi[macId] = { e: isNaN(eS) ? 0 : eS, d: isNaN(dS) ? 0 : dS }; });
                 }
 
-                if (otomatikMi && yeniVeriOzeti === sonVeriOzeti) return; 
-                sonVeriOzeti = yeniVeriOzeti;
+                if (otomatikMi && yeniVeriOzeti === sonVeriOzeti) return; sonVeriOzeti = yeniVeriOzeti;
                 
                 const puanBody = document.getElementById('puan-body'); puanBody.innerHTML = '';
                 data.puanDurumu.sort((a, b) => b.puan - a.puan || b.av - a.av);
-                data.puanDurumu.forEach(item => { let takimLogosu = TAKIM_LOGOLARI[item.takim] || "https://i.hizliresim.com/k9m6n02.png"; puanBody.innerHTML += `<tr><td class="takim-hucre"><img src="${takimLogosu}" class="takim-logo">${item.takim}</td><td>${item.o}</td> <td>${item.g}</td> <td>${item.b}</td> <td>${item.m}</td><td>${item.ag}</td> <td>${item.yg}</td> <td>${item.av}</td> <td class="puan-kutusu">${item.puan}</td></tr>`; });
+                
+                // MADDE 3: LİDER SATIRINI AYIRT ETME VE EKLEME
+                data.puanDurumu.forEach((item, index) => { 
+                    let takimLogosu = TAKIM_LOGOLARI[item.takim] || "https://i.hizliresim.com/k9m6n02.png"; 
+                    let liderClass = (index === 0) ? 'class="lider-row"' : '';
+                    puanBody.innerHTML += `<tr ${liderClass}><td class="takim-hucre"><img src="${takimLogosu}" class="takim-logo">${item.takim}</td><td>${item.o}</td> <td>${item.g}</td> <td>${item.b}</td> <td>${item.m}</td><td>${item.ag}</td> <td>${item.yg}</td> <td>${item.av}</td> <td class="puan-kutusu">${item.puan}</td></tr>`; 
+                });
+                
                 document.getElementById('puan-loading').style.display = 'none'; document.getElementById('puan-tablosu').style.display = 'table'; document.getElementById('renk-aciklamalari').style.display = 'flex'; 
 
                 let normalFikstur = data.fikstur.filter(m => !String(m.hafta).toUpperCase().includes('EFES'));
@@ -559,11 +558,8 @@
                     let durumTemiz = String(mac.durum).trim().toLowerCase(); let skorGoster = "";
                     if (durumTemiz === "oynanıyor") { skorGoster = `<div style="display: flex; flex-direction: column; align-items: center; line-height: 1.1;"><div class="canli-badge">🔴 CANLI</div><span>${mac.evSkor} - ${mac.depSkor}</span></div>`; }
                     else if (durumTemiz === "oynandı") { skorGoster = `${mac.evSkor} - ${mac.depSkor}`; } else { skorGoster = `<div style="color: var(--accent-color); font-size:0.9rem;">${mac.durum}</div>`; }
-                    
                     let evLogo = TAKIM_LOGOLARI[mac.evSahibi] || "https://i.hizliresim.com/k9m6n02.png"; let depLogo = TAKIM_LOGOLARI[mac.deplasman] || "https://i.hizliresim.com/k9m6n02.png";
-                    
-                    let evRenk = TAKIM_RENKLERI[mac.evSahibi] || "#d4af37";
-                    let depRenk = TAKIM_RENKLERI[mac.deplasman] || "#d4af37";
+                    let evRenk = TAKIM_RENKLERI[mac.evSahibi] || "#d4af37"; let depRenk = TAKIM_RENKLERI[mac.deplasman] || "#d4af37";
                     
                     fiksturAlan.innerHTML += `
                     <div class="mac-kart" onclick="acModal('${mac.evSahibi}', '${mac.deplasman}')" style="--ev-renk: ${evRenk}; --dep-renk: ${depRenk};">
@@ -584,6 +580,14 @@
                 function getWinner(haftaKodu, evTakim, depTakim) { let mac = efesFikstur.find(m => String(m.hafta).toUpperCase() === haftaKodu); if(!mac || String(mac.durum).trim().toLowerCase() !== "oynandı") return null; let eS = parseInt(mac.evSkor); let dS = parseInt(mac.depSkor); if(eS > dS) return evTakim; if(dS > eS) return depTakim; return null; }
                 let w_t1m1 = getWinner("EFES-T1-M1", t2, t4) || "1. Maç Galibi"; let w_t1m2 = getWinner("EFES-T1-M2", t3, t5) || "2. Maç Galibi"; let w_yf = getWinner("EFES-YF", w_t1m1, w_t1m2) || "Yarı Final Galibi";
 
+                // MADDE 5: ŞAMPİYONLUK KÜRSÜSÜ KONTROLÜ VE ATAMASI
+                let turnuvaSampiyonu = getWinner("EFES-FİN", t1, w_yf);
+                let containerEl = document.getElementById('pedestal-container');
+                let nameEl = document.getElementById('cup-champion-name');
+                if(turnuvaSampiyonu && !turnuvaSampiyonu.includes("Galibi") && !turnuvaSampiyonu.includes("Lig")) {
+                    nameEl.innerText = turnuvaSampiyonu; containerEl.classList.add('pedestal-active');
+                } else { nameEl.innerText = "BEKLENİYOR"; containerEl.classList.remove('pedestal-active'); }
+
                 function efesMacCiz(haftaKodu, evId, depId, skorEvId, skorDepId, durumId, guncelEv, guncelDep) {
                     let mac = efesFikstur.find(m => String(m.hafta).toUpperCase() === haftaKodu) || {evSkor: "-", depSkor: "-", durum: "Bekleniyor"};
                     let evLogo = TAKIM_LOGOLARI[guncelEv]; let depLogo = TAKIM_LOGOLARI[guncelDep];
@@ -602,6 +606,7 @@
         }
 
         window.onload = function() { 
+            createParticles(); // MADDE 1: Kıvılcımları ateşle
             baslangicSayaci(); oturumKontrol(); 
             setInterval(() => { if (localStorage.getItem("goat_kullanici")) { verileriGetir(true); } }, 10000); 
         };
