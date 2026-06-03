@@ -66,7 +66,6 @@
         .takim-logo { width: 35px; height: 35px; object-fit: contain; margin-right: 15px; border-radius: 50%; }
         .puan-kutusu { font-weight: 800; color: var(--accent-color); font-size: 1.2rem; background-color: rgba(212, 175, 55, 0.1); }
 
-        /* YENİ: ÇİFT RENKLİ YILAN NEON MAÇ KARTLARI */
         .mac-kart { position: relative; margin-bottom: 14px; cursor: pointer; transform: translateZ(0); border-radius: 8px; transition: transform 0.2s; }
         .mac-kart:hover { transform: scale(1.01); }
         .mac-kart:hover .neon-kutu span::before, .mac-kart:hover .neon-kutu span::after, .mac-kart:hover .neon-kutu::before, .mac-kart:hover .neon-kutu::after { filter: brightness(1.5); box-shadow: 0 0 15px currentColor; }
@@ -80,13 +79,11 @@
         .neon-kutu span { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
         .neon-kutu::before, .neon-kutu::after, .neon-kutu span::before, .neon-kutu span::after { content: ''; position: absolute; background: currentColor; box-shadow: 0 0 10px currentColor; }
         
-        /* Sol Takım Neon (Saat Yönünde Akış) */
         .neon-sol::before { top: 0; left: -100%; width: 100%; height: 2px; animation: k-top 4s linear infinite; }
         .neon-sol::after { top: -100%; right: 0; width: 2px; height: 100%; animation: k-right 4s linear infinite 1s; }
         .neon-sol span::before { bottom: 0; right: -100%; width: 100%; height: 2px; animation: k-bottom 4s linear infinite 2s; }
         .neon-sol span::after { bottom: -100%; left: 0; width: 2px; height: 100%; animation: k-left 4s linear infinite 3s; }
         
-        /* Sağ Takım Neon (Saat Yönünde Akış - Takip Efekti) */
         .neon-sag::before { top: 0; left: -100%; width: 100%; height: 2px; animation: k-top 4s linear infinite 2s; }
         .neon-sag::after { top: -100%; right: 0; width: 2px; height: 100%; animation: k-right 4s linear infinite 3s; }
         .neon-sag span::before { bottom: 0; right: -100%; width: 100%; height: 2px; animation: k-bottom 4s linear infinite 0s; }
@@ -132,12 +129,23 @@
         
         .modal-body { max-height: 60vh; overflow-y: auto; display: flex; flex-direction: column; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; transform: translateZ(0); }
         
+        /* YENİ: İSTATİSTİK BARLARI CSS */
         .istatistik-area, .forum-area { display: none; } 
         .istatistik-area.active { display: block; }
         .forum-area.active { display: flex; flex-direction: column; height: 100%; } 
         
-        .stat-row { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.03); font-weight: 600; font-size: 0.95rem; align-items: center; }
-        .stat-row:nth-child(even) { background: rgba(255,255,255,0.02); } .stat-val { width: 50px; text-align: center; font-weight: bold; font-size: 1.1rem; color: #fff; } .stat-label { flex: 1; text-align: center; color: #a1aab8; font-size: 0.9rem; letter-spacing: 0.5px; }
+        .stat-row { display: flex; flex-direction: column; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .stat-texts { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.95rem; align-items: center; margin-bottom: 8px; }
+        .stat-val { width: 50px; text-align: center; font-weight: bold; font-size: 1.15rem; color: #fff; } 
+        .stat-label { flex: 1; text-align: center; color: #a1aab8; font-size: 0.85rem; letter-spacing: 0.5px; text-transform: uppercase; }
+        
+        .stat-bars { display: flex; justify-content: center; gap: 6px; height: 6px; width: 100%; border-radius: 4px; }
+        .bar-left, .bar-right { flex: 1; display: flex; background: #11151e; border-radius: 4px; overflow: hidden; }
+        .bar-left { justify-content: flex-end; } 
+        .bar-right { justify-content: flex-start; }
+        .bar-fill { height: 100%; transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .blue-bar { background-color: #3498db; box-shadow: 0 0 10px rgba(52, 152, 219, 0.5); }
+        .red-bar { background-color: #e74c3c; box-shadow: 0 0 10px rgba(231, 76, 60, 0.5); }
         
         .forum-area { padding: 20px; } 
         .yorum-listesi { flex: 1; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; -webkit-overflow-scrolling: touch; }
@@ -184,7 +192,7 @@
         
         <div style="position: absolute; right: 40px; top: 15px; text-align: center;">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/Flag_of_Turkey.svg" alt="TR Bayrak" class="header-bayrak">
-            <div style="color: var(--accent-color); font-size: 0.9rem; margin-top: 8px; font-weight: 900; letter-spacing: 1.5px;">BETA 0.3.2</div>
+            <div style="color: var(--accent-color); font-size: 0.9rem; margin-top: 8px; font-weight: 900; letter-spacing: 1.5px;">BETA 0.3.3</div>
         </div>
     </header>
 
@@ -244,23 +252,24 @@
             </div>
 
             <div class="modal-body">
+                <!-- YENİ: İLERLEME ÇUBUKLU İSTATİSTİK ALANI -->
                 <div id="istatistik-icerik" class="istatistik-area active">
-                    <div class="stat-row"><div class="stat-val" id="st-top-e">0</div><div class="stat-label">Topa S. Olma %'si</div><div class="stat-val" id="st-top-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-geri-e">0</div><div class="stat-label">Topu Geri Kazanma (Sn)</div><div class="stat-val" id="st-geri-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-sut-e">0</div><div class="stat-label">Şut</div><div class="stat-val" id="st-sut-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-xg-e">0,0</div><div class="stat-label">Gol Beklentisi</div><div class="stat-val" id="st-xg-d">0,0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-pas-e">0</div><div class="stat-label">Pas</div><div class="stat-val" id="st-pas-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-mud-e">0</div><div class="stat-label">Müdahale</div><div class="stat-val" id="st-mud-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-tk-e">0</div><div class="stat-label">Top Kazanılan Müdahale</div><div class="stat-val" id="st-tk-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-kes-e">0</div><div class="stat-label">Top Kesmeler</div><div class="stat-val" id="st-kes-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-kur-e">0</div><div class="stat-label">Kurtarış</div><div class="stat-val" id="st-kur-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-faul-e">0</div><div class="stat-label">Yapılan Faul</div><div class="stat-val" id="st-faul-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-ofs-e">0</div><div class="stat-label">Ofsaytlar</div><div class="stat-val" id="st-ofs-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-kor-e">0</div><div class="stat-label">Köşe Vuruşu</div><div class="stat-val" id="st-kor-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-ser-e">0</div><div class="stat-label">Serbest Vuruşlar</div><div class="stat-val" id="st-ser-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-pen-e">0</div><div class="stat-label">Penaltı Vuruşları</div><div class="stat-val" id="st-pen-d">0</div></div>
-                    <div class="stat-row"><div class="stat-val" id="st-sari-e">0</div><div class="stat-label">Sarı Kartlar</div><div class="stat-val" id="st-sari-d">0</div></div>
-                    <div class="stat-row" style="border-bottom: none;"><div class="stat-val" style="color:#e74c3c;" id="st-kirmizi-e">0</div><div class="stat-label" style="color:#e74c3c; font-weight:bold;">Kırmızı Kartlar</div><div class="stat-val" style="color:#e74c3c;" id="st-kirmizi-d">0</div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-top-e">0</div><div class="stat-label">Topa S. Olma %'si</div><div class="stat-val" id="st-top-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-top-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-top-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-geri-e">0</div><div class="stat-label">Topu Geri Kazanma (Sn)</div><div class="stat-val" id="st-geri-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-geri-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-geri-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-sut-e">0</div><div class="stat-label">Şut</div><div class="stat-val" id="st-sut-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-sut-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-sut-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-xg-e">0,0</div><div class="stat-label">Gol Beklentisi</div><div class="stat-val" id="st-xg-d">0,0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-xg-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-xg-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-pas-e">0</div><div class="stat-label">Pas</div><div class="stat-val" id="st-pas-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-pas-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-pas-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-mud-e">0</div><div class="stat-label">Müdahale</div><div class="stat-val" id="st-mud-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-mud-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-mud-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-tk-e">0</div><div class="stat-label">Top Kazanılan Müdahale</div><div class="stat-val" id="st-tk-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-tk-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-tk-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-kes-e">0</div><div class="stat-label">Top Kesmeler</div><div class="stat-val" id="st-kes-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-kes-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-kes-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-kur-e">0</div><div class="stat-label">Kurtarış</div><div class="stat-val" id="st-kur-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-kur-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-kur-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-faul-e">0</div><div class="stat-label">Yapılan Faul</div><div class="stat-val" id="st-faul-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-faul-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-faul-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-ofs-e">0</div><div class="stat-label">Ofsaytlar</div><div class="stat-val" id="st-ofs-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-ofs-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-ofs-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-kor-e">0</div><div class="stat-label">Köşe Vuruşu</div><div class="stat-val" id="st-kor-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-kor-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-kor-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-ser-e">0</div><div class="stat-label">Serbest Vuruşlar</div><div class="stat-val" id="st-ser-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-ser-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-ser-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-pen-e">0</div><div class="stat-label">Penaltı Vuruşları</div><div class="stat-val" id="st-pen-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-pen-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-pen-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row"><div class="stat-texts"><div class="stat-val" id="st-sari-e">0</div><div class="stat-label">Sarı Kartlar</div><div class="stat-val" id="st-sari-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-sari-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-sari-d" style="width:0%"></div></div></div></div>
+                    <div class="stat-row" style="border-bottom: none;"><div class="stat-texts"><div class="stat-val" style="color:#e74c3c;" id="st-kirmizi-e">0</div><div class="stat-label" style="color:#e74c3c; font-weight:bold;">Kırmızı Kartlar</div><div class="stat-val" style="color:#e74c3c;" id="st-kirmizi-d">0</div></div><div class="stat-bars"><div class="bar-left"><div class="bar-fill blue-bar" id="bar-kirmizi-e" style="width:0%"></div></div><div class="bar-right"><div class="bar-fill red-bar" id="bar-kirmizi-d" style="width:0%"></div></div></div></div>
                 </div>
 
                 <div id="forum-icerik" class="forum-area">
@@ -332,13 +341,8 @@
         const DAVET_KODU = "goat2026"; 
         const TAKIM_LOGOLARI = { "Bozkurt FC": "image.png", "Gunes FC": "image2.png", "Vaxess FC": "image3.png", "Vega SK": "image4.png", "Huginn SK": "image5.png" };
         
-        // YENİ: TAKIM RENKLERİ VERİTABANI
         const TAKIM_RENKLERI = {
-            "Bozkurt FC": "#e74c3c", // Kırmızı
-            "Gunes FC": "#f1c40f", // Sarı
-            "Vaxess FC": "#95a5a6", // Gri
-            "Vega SK": "#27ae60", // Yeşil
-            "Huginn SK": "#3498db" // Mavi
+            "Bozkurt FC": "#e74c3c", "Gunes FC": "#f1c40f", "Vaxess FC": "#95a5a6", "Vega SK": "#27ae60", "Huginn SK": "#3498db"
         };
 
         let aktifMacKey = ""; 
@@ -447,6 +451,30 @@
             liste.scrollTop = liste.scrollHeight;
         }
 
+        // YENİ: OTOMATİK BAR HESAPLAMA FONKSİYONU
+        function statGuncelle(id, valE, valD) {
+            document.getElementById('st-' + id + '-e').innerText = valE;
+            document.getElementById('st-' + id + '-d').innerText = valD;
+            
+            // Veriyi matematiğe dök (Virgülü noktaya çevir)
+            let e = parseFloat(String(valE).replace(',', '.')); 
+            let d = parseFloat(String(valD).replace(',', '.'));
+            if(isNaN(e)) e = 0; if(isNaN(d)) d = 0;
+            
+            let total = e + d; 
+            let pE = 0, pD = 0;
+            if(total > 0) { 
+                pE = (e / total) * 100; 
+                pD = (d / total) * 100; 
+            }
+            
+            // Çubukları Yüzdelik Orana Göre Doldur (0.5 saniye animasyonla)
+            setTimeout(() => {
+                document.getElementById('bar-' + id + '-e').style.width = pE + '%';
+                document.getElementById('bar-' + id + '-d').style.width = pD + '%';
+            }, 50); // Modal açıldıktan hemen sonra aksın diye küçük bir gecikme
+        }
+
         function acModal(evSahibi, deplasman) {
             aktifMacKey = "forum_" + evSahibi.replace(/\s+/g, '') + "_" + deplasman.replace(/\s+/g, '');
             let tiklananMac = window.tumFikstur.find(m => m.evSahibi === evSahibi && m.deplasman === deplasman) || {st: {}};
@@ -461,22 +489,24 @@
             }
             
             let st = tiklananMac.st;
-            document.getElementById('st-top-e').innerText = st.evTop; document.getElementById('st-top-d').innerText = st.depTop;
-            document.getElementById('st-geri-e').innerText = st.evGeri; document.getElementById('st-geri-d').innerText = st.depGeri;
-            document.getElementById('st-sut-e').innerText = st.evSut; document.getElementById('st-sut-d').innerText = st.depSut;
-            document.getElementById('st-xg-e').innerText = st.evxG; document.getElementById('st-xg-d').innerText = st.depxG;
-            document.getElementById('st-pas-e').innerText = st.evPas; document.getElementById('st-pas-d').innerText = st.depPas;
-            document.getElementById('st-mud-e').innerText = st.evMud; document.getElementById('st-mud-d').innerText = st.depMud;
-            document.getElementById('st-tk-e').innerText = st.evTk; document.getElementById('st-tk-d').innerText = st.depTk;
-            document.getElementById('st-kes-e').innerText = st.evKes; document.getElementById('st-kes-d').innerText = st.depKes;
-            document.getElementById('st-kur-e').innerText = st.evKur; document.getElementById('st-kur-d').innerText = st.depKur;
-            document.getElementById('st-faul-e').innerText = st.evFaul; document.getElementById('st-faul-d').innerText = st.depFaul;
-            document.getElementById('st-ofs-e').innerText = st.evOfs; document.getElementById('st-ofs-d').innerText = st.depOfs;
-            document.getElementById('st-kor-e').innerText = st.evKor; document.getElementById('st-kor-d').innerText = st.depKor;
-            document.getElementById('st-ser-e').innerText = st.evSer; document.getElementById('st-ser-d').innerText = st.depSer;
-            document.getElementById('st-pen-e').innerText = st.evPen; document.getElementById('st-pen-d').innerText = st.depPen;
-            document.getElementById('st-sari-e').innerText = st.evSari; document.getElementById('st-sari-d').innerText = st.depSari;
-            document.getElementById('st-kirmizi-e').innerText = st.evKir; document.getElementById('st-kirmizi-d').innerText = st.depKir;
+            
+            // YENİ: 32 SATIR KODU 16 SATIRA DÜŞÜRDÜK VE BARLARI OTOMATİĞE BAĞLADIK
+            statGuncelle('top', st.evTop, st.depTop);
+            statGuncelle('geri', st.evGeri, st.depGeri);
+            statGuncelle('sut', st.evSut, st.depSut);
+            statGuncelle('xg', st.evxG, st.depxG);
+            statGuncelle('pas', st.evPas, st.depPas);
+            statGuncelle('mud', st.evMud, st.depMud);
+            statGuncelle('tk', st.evTk, st.depTk);
+            statGuncelle('kes', st.evKes, st.depKes);
+            statGuncelle('kur', st.evKur, st.depKur);
+            statGuncelle('faul', st.evFaul, st.depFaul);
+            statGuncelle('ofs', st.evOfs, st.depOfs);
+            statGuncelle('kor', st.evKor, st.depKor);
+            statGuncelle('ser', st.evSer, st.depSer);
+            statGuncelle('pen', st.evPen, st.depPen);
+            statGuncelle('sari', st.evSari, st.depSari);
+            statGuncelle('kirmizi', st.evKir, st.depKir);
 
             let yorumAlani = document.getElementById("dinamik-yorum-alani");
             yorumlariEkranaBas(); 
@@ -485,7 +515,11 @@
             switchModalTab('istatistik'); document.getElementById('macModal').style.display = 'flex';
         }
 
-        function kapatModal() { document.getElementById('macModal').style.display = 'none'; }
+        function kapatModal() { 
+            document.getElementById('macModal').style.display = 'none'; 
+            // Kapanırken çubukları sıfırla ki bir dahaki açılışta baştan dolsunlar
+            document.querySelectorAll('.bar-fill').forEach(bar => bar.style.width = '0%');
+        }
 
         async function verileriGetir(otomatikMi = false) {
             try {
@@ -528,7 +562,6 @@
                     
                     let evLogo = TAKIM_LOGOLARI[mac.evSahibi] || "https://i.hizliresim.com/k9m6n02.png"; let depLogo = TAKIM_LOGOLARI[mac.deplasman] || "https://i.hizliresim.com/k9m6n02.png";
                     
-                    // YENİ: KARTLARA TAKIM RENKLERİNİ GÖMÜYORUZ
                     let evRenk = TAKIM_RENKLERI[mac.evSahibi] || "#d4af37";
                     let depRenk = TAKIM_RENKLERI[mac.deplasman] || "#d4af37";
                     
